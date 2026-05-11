@@ -13,6 +13,8 @@ model IndividualRegistration {
   fullName               String
   age                    String
   institution            String
+  city                   String?
+  pincode                String?
   email                  String
   phone                  String
   committeePreference1   String
@@ -34,6 +36,7 @@ model DelegationRegistration {
   registrationId         String   @unique
   institution            String
   city                   String?
+  pincode                String?
   headDelegateName       String
   headDelegateEmail      String
   headDelegatePhone      String
@@ -62,4 +65,16 @@ model Admin {
   passwordHash String
   createdAt    DateTime @default(now())
   lastLogin    DateTime?
+}
+
+model College {
+  id         String   @id @default(cuid())
+  name       String
+  city       String
+  pincode    String?
+  source     String   @default("user")
+  isVerified Boolean  @default(false)
+  addedAt    DateTime @default(now())
+
+  @@unique([name, city])
 }

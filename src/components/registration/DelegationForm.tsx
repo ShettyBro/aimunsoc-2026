@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, AlertCircle, CreditCard, Users, UserCheck, School, ChevronLeft, ChevronRight } from 'lucide-react';
 import StepIndicator from '../ui/StepIndicator';
@@ -14,11 +14,14 @@ import {
   validateFullName, validateInstitution,
   validateEmail, validateIndianPhone, validateTransactionId,
 } from '../../utils/validators';
+import InstitutionInput from '../ui/InstitutionInput';
+import { CollegeEntry } from '../../data/colleges';
 
 const STEPS = ['Institution', 'Delegation', 'Accommodation', 'Payment'];
 
 const emptyForm: DelegationFormData = {
-  institution: '', city: '', headDelegateName: '', headDelegateEmail: '', headDelegatePhone: '',
+  institution: '', city: '', pincode: '',
+  headDelegateName: '', headDelegateEmail: '', headDelegatePhone: '',
   numberOfDelegates: '', accommodationRequired: false, accommodationDelegates: '', accommodationScheme: '', transactionId: '',
 };
 
@@ -36,6 +39,11 @@ const DelegationForm: React.FC = () => {
   const [showTxInput, setShowTxInput] = useState(false);
   const [errorBanner, setErrorBanner] = useState('');
   const [registrationId, setRegistrationId] = useState('');
+  const [extraColleges, setExtraColleges] = useState<CollegeEntry[]>([]);
+
+  useEffect(() => {
+    api.get('/colleges').then(r => setExtraColleges(r.data.colleges ?? [])).catch(() => {});
+  }, []);
 
   const set = (field: keyof DelegationFormData, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -156,15 +164,14 @@ const DelegationForm: React.FC = () => {
             className="glass-card p-8">
             <h2 className="font-serif text-2xl text-white mb-6 flex items-center gap-2"><Users size={22} className="text-gold" /> Institution Details</h2>
             <div className="grid md:grid-cols-2 gap-5">
-              <div className="md:col-span-2">
-                <label className={labelCls}>Institution Name *</label>
-                <input className={`${inputCls} ${errors.institution ? 'border-danger' : ''}`} placeholder="College or institution name" value={form.institution} onChange={(e) => set('institution', e.target.value)} />
-                <FieldError msg={errors.institution} />
-              </div>
-              <div>
-                <label className={labelCls}>City</label>
-                <input className={inputCls} placeholder="City" value={form.city} onChange={(e) => set('city', e.target.value)} />
-              </div>
+              <InstitutionInput
+                institution={form.institution} city={form.city} pincode={form.pincode}
+                onInstitutionChange={v => set('institution', v)}
+                onCityChange={v => set('city', v)}
+                onPincodeChange={v => set('pincode', v)}
+                errors={{ institution: errors.institution, city: errors.city, pincode: errors.pincode }}
+                extraColleges={extraColleges}
+              />
               <div>
                 <label className={labelCls}>Head Delegate Name * <span className="text-gold text-xs">(first &amp; last name)</span></label>
                 <input className={`${inputCls} ${errors.headDelegateName ? 'border-danger' : ''}`} placeholder="Full name" value={form.headDelegateName} onChange={(e) => set('headDelegateName', e.target.value)} />

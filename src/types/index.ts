@@ -2,6 +2,8 @@ export interface IndividualFormData {
   fullName: string;
   age: string;
   institution: string;
+  city: string;
+  pincode: string;
   email: string;
   phone: string;
   committeePreference1: string;
@@ -18,6 +20,7 @@ export interface IndividualFormData {
 export interface DelegationFormData {
   institution: string;
   city: string;
+  pincode: string;
   headDelegateName: string;
   headDelegateEmail: string;
   headDelegatePhone: string;

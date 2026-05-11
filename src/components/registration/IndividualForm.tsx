@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, AlertCircle, CreditCard, User, Users, School, UserCheck, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { CheckCircle, AlertCircle, CreditCard, User, Users, School, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import StepIndicator from '../ui/StepIndicator';
 import Button from '../ui/Button';
 import {
@@ -15,11 +15,14 @@ import {
   validateFullName, validateAge, validateInstitution,
   validateEmail, validateIndianPhone, validateTransactionId,
 } from '../../utils/validators';
+import InstitutionInput from '../ui/InstitutionInput';
+import { CollegeEntry } from '../../data/colleges';
 
 const STEPS = ['Personal', 'Committees', 'Accommodation', 'Payment', 'Confirm'];
 
 const emptyForm: IndividualFormData = {
-  fullName: '', age: '', institution: '', email: '', phone: '',
+  fullName: '', age: '', institution: '', city: '', pincode: '',
+  email: '', phone: '',
   committeePreference1: '', committeePreference2: '', committeePreference3: '',
   portfolioPreference1: '', portfolioPreference2: '', portfolioPreference3: '',
   accommodationRequired: false, accommodationScheme: '', transactionId: '',
@@ -45,6 +48,11 @@ const IndividualForm: React.FC = () => {
   const [showTxInput, setShowTxInput] = useState(false);
   const [errorBanner, setErrorBanner] = useState('');
   const [registrationId, setRegistrationId] = useState('');
+  const [extraColleges, setExtraColleges] = useState<CollegeEntry[]>([]);
+
+  useEffect(() => {
+    api.get('/colleges').then(r => setExtraColleges(r.data.colleges ?? [])).catch(() => {});
+  }, []);
 
   const set = (field: keyof IndividualFormData, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -138,11 +146,14 @@ const IndividualForm: React.FC = () => {
                 <input type="number" min={18} max={80} className={`${inputCls} ${errors.age ? 'border-danger' : ''}`} placeholder="Your age (18+)" value={form.age} onChange={(e) => set('age', e.target.value)} />
                 <FieldError msg={errors.age} />
               </div>
-              <div className="md:col-span-2">
-                <label className={labelCls}>Institution *</label>
-                <input className={`${inputCls} ${errors.institution ? 'border-danger' : ''}`} placeholder="Your college/institution" value={form.institution} onChange={(e) => set('institution', e.target.value)} />
-                <FieldError msg={errors.institution} />
-              </div>
+              <InstitutionInput
+                institution={form.institution} city={form.city} pincode={form.pincode}
+                onInstitutionChange={v => set('institution', v)}
+                onCityChange={v => set('city', v)}
+                onPincodeChange={v => set('pincode', v)}
+                errors={{ institution: errors.institution, city: errors.city, pincode: errors.pincode }}
+                extraColleges={extraColleges}
+              />
               <div>
                 <label className={labelCls}>Email *</label>
                 <input type="email" className={`${inputCls} ${errors.email ? 'border-danger' : ''}`} placeholder="your@email.com" value={form.email} onChange={(e) => set('email', e.target.value)} />
