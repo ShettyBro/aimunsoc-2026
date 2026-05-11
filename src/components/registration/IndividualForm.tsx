@@ -11,6 +11,10 @@ import { committees } from '../../data/committees';
 import { calcIndividualTotal } from '../../utils/pricing';
 import api from '../../utils/api';
 import { IndividualFormData } from '../../types';
+import {
+  validateFullName, validateAge, validateInstitution,
+  validateEmail, validateIndianPhone, validateTransactionId,
+} from '../../utils/validators';
 
 const STEPS = ['Personal', 'Committees', 'Accommodation', 'Payment', 'Confirm'];
 
@@ -49,23 +53,35 @@ const IndividualForm: React.FC = () => {
 
   const validateStep = (): boolean => {
     const errs: typeof errors = {};
+
     if (step === 0) {
-      if (!form.fullName.trim()) errs.fullName = 'Full name is required';
-      if (!form.age.trim()) errs.age = 'Age is required';
-      if (!form.institution.trim()) errs.institution = 'Institution is required';
-      if (!form.email.trim()) errs.email = 'Email is required';
-      else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = 'Invalid email';
-      if (!form.phone.trim()) errs.phone = 'Phone is required';
+      const nameErr = validateFullName(form.fullName);
+      if (nameErr) errs.fullName = nameErr;
+
+      const ageErr = validateAge(form.age);
+      if (ageErr) errs.age = ageErr;
+
+      const instErr = validateInstitution(form.institution);
+      if (instErr) errs.institution = instErr;
+
+      const emailErr = validateEmail(form.email);
+      if (emailErr) errs.email = emailErr;
+
+      const phoneErr = validateIndianPhone(form.phone);
+      if (phoneErr) errs.phone = phoneErr;
     }
+
     if (step === 1) {
-      if (!form.committeePreference1) errs.committees = 'At least 1 committee preference required';
-      if (!form.portfolioPreference1) errs.portfolios = 'At least 1 portfolio preference required';
+      if (!form.committeePreference1) errs.committees = 'At least 1 committee preference is required.';
+      if (form.committeePreference1 && !form.portfolioPreference1) errs.portfolios = 'Please select a portfolio for your 1st preference.';
     }
+
     if (step === 2) {
       if (form.accommodationRequired && !form.accommodationScheme) {
-        errs.accommodationScheme = 'Please select an accommodation scheme';
+        errs.accommodationScheme = 'Please select an accommodation scheme.';
       }
     }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -74,7 +90,8 @@ const IndividualForm: React.FC = () => {
   const prev = () => setStep((s) => s - 1);
 
   const handleSubmit = async () => {
-    if (!form.transactionId.trim() || form.transactionId.trim().length < 3) return;
+    const txErr = validateTransactionId(form.transactionId);
+    if (txErr) { setErrors(e => ({ ...e, transactionId: txErr })); return; }
     setIsSubmitting(true);
     setErrorBanner('');
     try {
@@ -117,8 +134,8 @@ const IndividualForm: React.FC = () => {
                 <FieldError msg={errors.fullName} />
               </div>
               <div>
-                <label className={labelCls}>Age *</label>
-                <input type="number" className={`${inputCls} ${errors.age ? 'border-danger' : ''}`} placeholder="Your age" value={form.age} onChange={(e) => set('age', e.target.value)} />
+                <label className={labelCls}>Age * <span className="text-gold text-xs">(must be 18+)</span></label>
+                <input type="number" min={18} max={80} className={`${inputCls} ${errors.age ? 'border-danger' : ''}`} placeholder="Your age (18+)" value={form.age} onChange={(e) => set('age', e.target.value)} />
                 <FieldError msg={errors.age} />
               </div>
               <div className="md:col-span-2">
@@ -132,8 +149,8 @@ const IndividualForm: React.FC = () => {
                 <FieldError msg={errors.email} />
               </div>
               <div>
-                <label className={labelCls}>Phone *</label>
-                <input type="tel" className={`${inputCls} ${errors.phone ? 'border-danger' : ''}`} placeholder="+91 XXXXX XXXXX" value={form.phone} onChange={(e) => set('phone', e.target.value)} />
+                <label className={labelCls}>Phone * <span className="text-gold text-xs">(Indian 10-digit number)</span></label>
+                <input type="tel" maxLength={13} className={`${inputCls} ${errors.phone ? 'border-danger' : ''}`} placeholder="9XXXXXXXXX" value={form.phone} onChange={(e) => set('phone', e.target.value)} />
                 <FieldError msg={errors.phone} />
               </div>
             </div>
@@ -240,9 +257,10 @@ const IndividualForm: React.FC = () => {
                 <p className="text-muted text-sm">After completing payment, paste your Transaction ID below:</p>
                 <div>
                   <label className={labelCls}>Transaction ID *</label>
-                  <input className={inputCls} placeholder="Paste your payment reference ID" value={form.transactionId} onChange={(e) => set('transactionId', e.target.value)} />
+                  <input className={`${inputCls} ${errors.transactionId ? 'border-danger' : ''}`} placeholder="Paste your payment reference ID" value={form.transactionId} onChange={(e) => set('transactionId', e.target.value)} />
+                  <FieldError msg={errors.transactionId} />
                 </div>
-                <Button fullWidth size="lg" disabled={isSubmitting || form.transactionId.trim().length < 3} onClick={handleSubmit}>
+                <Button fullWidth size="lg" disabled={isSubmitting || !form.transactionId.trim()} onClick={handleSubmit}>
                   {isSubmitting ? 'Submitting...' : 'Submit Registration'}
                 </Button>
                 <p className="text-muted text-xs text-center">

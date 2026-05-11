@@ -10,6 +10,10 @@ import {
 import { calcDelegationTotal } from '../../utils/pricing';
 import api from '../../utils/api';
 import { DelegationFormData } from '../../types';
+import {
+  validateFullName, validateInstitution,
+  validateEmail, validateIndianPhone, validateTransactionId,
+} from '../../utils/validators';
 
 const STEPS = ['Institution', 'Delegation', 'Accommodation', 'Payment'];
 
@@ -40,19 +44,30 @@ const DelegationForm: React.FC = () => {
 
   const validateStep = (): boolean => {
     const errs: typeof errors = {};
+
     if (step === 0) {
-      if (!form.institution.trim()) errs.institution = 'Institution name is required';
-      if (!form.headDelegateName.trim()) errs.headDelegateName = 'Head delegate name is required';
-      if (!form.headDelegateEmail.trim()) errs.headDelegateEmail = 'Email is required';
-      else if (!/\S+@\S+\.\S+/.test(form.headDelegateEmail)) errs.headDelegateEmail = 'Invalid email';
-      if (!form.headDelegatePhone.trim()) errs.headDelegatePhone = 'Phone is required';
+      const instErr = validateInstitution(form.institution);
+      if (instErr) errs.institution = instErr;
+
+      const nameErr = validateFullName(form.headDelegateName);
+      if (nameErr) errs.headDelegateName = nameErr;
+
+      const emailErr = validateEmail(form.headDelegateEmail);
+      if (emailErr) errs.headDelegateEmail = emailErr;
+
+      const phoneErr = validateIndianPhone(form.headDelegatePhone);
+      if (phoneErr) errs.headDelegatePhone = phoneErr;
     }
+
     if (step === 1) {
-      if (!form.numberOfDelegates) errs.numberOfDelegates = 'Please select delegate count';
+      if (!form.numberOfDelegates) errs.numberOfDelegates = 'Please select delegate count.';
     }
+
     if (step === 2) {
-      if (form.accommodationRequired && !form.accommodationScheme) errs.accommodationScheme = 'Select accommodation scheme';
+      if (form.accommodationRequired && !form.accommodationScheme)
+        errs.accommodationScheme = 'Please select an accommodation scheme.';
     }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -61,7 +76,8 @@ const DelegationForm: React.FC = () => {
   const prev = () => setStep((s) => Math.max(s - 1, 0));
 
   const handleSubmit = async () => {
-    if (!form.transactionId.trim() || form.transactionId.trim().length < 3) return;
+    const txErr = validateTransactionId(form.transactionId);
+    if (txErr) { setErrors(e => ({ ...e, transactionId: txErr })); return; }
     setIsSubmitting(true);
     setErrorBanner('');
     try {
@@ -150,7 +166,7 @@ const DelegationForm: React.FC = () => {
                 <input className={inputCls} placeholder="City" value={form.city} onChange={(e) => set('city', e.target.value)} />
               </div>
               <div>
-                <label className={labelCls}>Head Delegate Name *</label>
+                <label className={labelCls}>Head Delegate Name * <span className="text-gold text-xs">(first &amp; last name)</span></label>
                 <input className={`${inputCls} ${errors.headDelegateName ? 'border-danger' : ''}`} placeholder="Full name" value={form.headDelegateName} onChange={(e) => set('headDelegateName', e.target.value)} />
                 <FieldError msg={errors.headDelegateName} />
               </div>
@@ -160,8 +176,8 @@ const DelegationForm: React.FC = () => {
                 <FieldError msg={errors.headDelegateEmail} />
               </div>
               <div>
-                <label className={labelCls}>Head Delegate Phone *</label>
-                <input type="tel" className={`${inputCls} ${errors.headDelegatePhone ? 'border-danger' : ''}`} placeholder="+91 XXXXX XXXXX" value={form.headDelegatePhone} onChange={(e) => set('headDelegatePhone', e.target.value)} />
+                <label className={labelCls}>Head Delegate Phone * <span className="text-gold text-xs">(Indian 10-digit)</span></label>
+                <input type="tel" maxLength={13} className={`${inputCls} ${errors.headDelegatePhone ? 'border-danger' : ''}`} placeholder="9XXXXXXXXX" value={form.headDelegatePhone} onChange={(e) => set('headDelegatePhone', e.target.value)} />
                 <FieldError msg={errors.headDelegatePhone} />
               </div>
             </div>
@@ -265,9 +281,10 @@ const DelegationForm: React.FC = () => {
                 <p className="text-muted text-sm">After completing payment, paste your Transaction ID:</p>
                 <div>
                   <label className={labelCls}>Transaction ID *</label>
-                  <input className={inputCls} placeholder="Paste transaction reference" value={form.transactionId} onChange={(e) => set('transactionId', e.target.value)} />
+                  <input className={`${inputCls} ${errors.transactionId ? 'border-danger' : ''}`} placeholder="Paste transaction reference" value={form.transactionId} onChange={(e) => set('transactionId', e.target.value)} />
+                  <FieldError msg={errors.transactionId} />
                 </div>
-                <Button fullWidth size="lg" disabled={isSubmitting || form.transactionId.trim().length < 3} onClick={handleSubmit}>
+                <Button fullWidth size="lg" disabled={isSubmitting || !form.transactionId.trim()} onClick={handleSubmit}>
                   {isSubmitting ? 'Submitting...' : 'Submit Delegation Registration'}
                 </Button>
               </div>
