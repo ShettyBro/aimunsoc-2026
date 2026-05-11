@@ -1,0 +1,59 @@
+# ─── Dependencies ─────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ─── Environment Variables ────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test.local
+.env.production
+.env.production.local
+
+# ─── Build Outputs ────────────────────────────────────────
+dist/
+build/
+out/
+.vercel/
+
+# ─── Vite ─────────────────────────────────────────────────
+.vite/
+vite.config.ts.timestamp-*
+
+# ─── TypeScript ───────────────────────────────────────────
+*.tsbuildinfo
+
+# ─── Prisma ───────────────────────────────────────────────
+# Keep schema.prisma but ignore generated client
+server/node_modules/
+server/prisma/migrations/         # optional: remove if you want to commit migrations
+
+# ─── Logs ─────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ─── OS / Editor ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── Testing ──────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── Misc ─────────────────────────────────────────────────
+*.local
+.cache/
