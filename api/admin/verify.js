@@ -1,0 +1,22 @@
+import { requireAuth } from '../../lib/auth.js';
+
+export default function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({ success: false, message: 'Method not allowed' });
+  }
+
+  const payload = requireAuth(req, res);
+  if (!payload) return; // 401 already sent
+
+  return res.status(200).json({
+    success: true,
+    username: payload.username,
+    tokenIssuedAt: payload.iat,
+    tokenExpiresAt: payload.exp,
+  });
+}

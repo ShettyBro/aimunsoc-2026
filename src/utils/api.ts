@@ -1,16 +1,30 @@
 import axios from 'axios';
+import { getToken, clearSession } from './auth';
 
-// Relative /api — works on Vercel (same domain) and with `vercel dev` locally
 const api = axios.create({
   baseURL: '/api',
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000,
 });
 
+// ── Request interceptor — attach JWT if present ───────────────────────────
+api.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// ── Response interceptor — auto-clear session on 401 ─────────────────────
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('API Error:', error?.response?.data || error.message);
+    if (error?.response?.status === 401) {
+      // Token expired or invalid — clear local session
+      // (The component's useEffect will detect missing token and redirect)
+      clearSession();
+    }
     return Promise.reject(error);
   }
 );

@@ -11,8 +11,12 @@ export const DELEGATION_TIERS = [
   { min: 25, max: Infinity, perHead: 1400 },
 ];
 
-// TODO: Update with actual AiCon 2026 conference date
-export const CONFERENCE_DATE = new Date('2026-09-15T09:00:00');
+// Reads from VITE_CONFERENCE_DATE env var — update in Vercel dashboard without redeploying
+// Format: YYYY-MM-DD  e.g. "2026-09-15"
+const _rawDate = import.meta.env.VITE_CONFERENCE_DATE as string;
+export const CONFERENCE_DATE = _rawDate
+  ? new Date(`${_rawDate}T09:00:00`)
+  : new Date('2026-09-15T09:00:00'); // fallback
 
 export const PAYMENT_URL = import.meta.env.VITE_PAYMENT_URL as string || 'https://www.acharyaerptech.in/ExternalPayment/179';
 

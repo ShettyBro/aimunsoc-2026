@@ -55,3 +55,11 @@ model ContactMessage {
   message   String
   createdAt DateTime @default(now())
 }
+
+model Admin {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  lastLogin    DateTime?
+}
