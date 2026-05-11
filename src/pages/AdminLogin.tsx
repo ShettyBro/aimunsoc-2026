@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Lock, User, Eye, EyeOff, AlertCircle, Shield } from 'lucide-react';
 import api from '../utils/api';
 import { saveSession } from '../utils/auth';
+import GlobalBackground from '../components/layout/GlobalBackground';
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -35,14 +36,8 @@ const AdminLogin: React.FC = () => {
     'w-full bg-navy border border-navy-mid text-white rounded-md px-4 py-3 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors placeholder-muted';
 
   return (
-    <div className="min-h-screen bg-navy flex items-center justify-center px-4">
-      {/* Background glows */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-[500px] h-[500px] rounded-full opacity-10"
-          style={{ background: 'radial-gradient(circle, #1A3A5C 0%, transparent 70%)', top: '10%', left: '10%' }} />
-        <div className="absolute w-[400px] h-[400px] rounded-full opacity-10"
-          style={{ background: 'radial-gradient(circle, #112240 0%, transparent 70%)', bottom: '10%', right: '10%' }} />
-      </div>
+    <div className="relative min-h-screen flex items-center justify-center px-4">
+      <GlobalBackground />
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

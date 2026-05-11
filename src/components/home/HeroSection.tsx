@@ -56,35 +56,8 @@ const HeroSection: React.FC = () => {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-navy"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent"
     >
-      {/* Animated gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="blob-1 absolute w-[600px] h-[600px] rounded-full opacity-20"
-          style={{
-            background: 'radial-gradient(circle, #1A3A5C 0%, transparent 70%)',
-            top: '10%',
-            left: '-10%',
-          }}
-        />
-        <div
-          className="blob-2 absolute w-[500px] h-[500px] rounded-full opacity-15"
-          style={{
-            background: 'radial-gradient(circle, #112240 0%, transparent 70%)',
-            bottom: '5%',
-            right: '-5%',
-          }}
-        />
-        <div
-          className="blob-3 absolute w-[400px] h-[400px] rounded-full opacity-10"
-          style={{
-            background: 'radial-gradient(circle, #1A3A5C 0%, transparent 70%)',
-            top: '40%',
-            left: '40%',
-          }}
-        />
-      </div>
 
       {/* World map */}
       <WorldMapOverlay />

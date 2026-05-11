@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import AdminLogin from './pages/AdminLogin';
 import { isLoggedIn } from './utils/auth';
+import GlobalBackground from './components/layout/GlobalBackground';
 
 // ── Protect /admin — redirect to login if no valid token ─────────────────
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -25,6 +26,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 function App() {
   return (
     <Router>
+      <GlobalBackground />
       <Routes>
         {/* ── Admin routes (no Navbar/Footer) ───── */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -41,7 +43,7 @@ function App() {
         <Route
           path="/*"
           element={
-            <div className="min-h-screen bg-navy flex flex-col">
+            <div className="relative z-[1] min-h-screen flex flex-col">
               <Navbar />
               <main className="flex-1 pt-16">
                 <Routes>

@@ -25,11 +25,35 @@ html {
 }
 
 body {
-  background-color: var(--navy);
+  /* GlobalBackground component renders the real background */
+  background-color: #030810;
   color: var(--white);
   font-family: 'DM Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Shooting star animation */
+@keyframes shootingStar {
+  0%   { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; width: 0; }
+  5%   { opacity: 1; }
+  60%  { opacity: 0.8; width: 160px; }
+  100% { transform: translateX(600px) translateY(300px) rotate(-35deg); opacity: 0; width: 0; }
+}
+.shooting-star {
+  animation: shootingStar 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+@keyframes shootingStar2 {
+  0%   { transform: translateX(0) translateY(0) rotate(-20deg); opacity: 0; width: 0; }
+  5%   { opacity: 1; }
+  60%  { opacity: 0.6; width: 100px; }
+  100% { transform: translateX(400px) translateY(200px) rotate(-20deg); opacity: 0; width: 0; }
+}
+.shooting-star-2 {
+  animation: shootingStar2 9s ease-in-out infinite;
+  animation-delay: 7s;
 }
 
 h1, h2, h3 {
@@ -40,32 +64,90 @@ input, select, textarea, button {
   font-family: 'DM Sans', system-ui, sans-serif;
 }
 
-/* Gradient mesh blobs animation */
+/* ── Smooth GPU-accelerated glow orbs ───────────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* Gold orb — top right */
+.orb-gold {
+  width: min(55vw, 800px);
+  height: min(55vw, 800px);
+  top: -18%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(201,168,76,0.14) 0%, rgba(201,168,76,0.04) 45%, transparent 70%);
+  animation: orbDrift1 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Teal orb — bottom left */
+.orb-teal {
+  width: min(65vw, 950px);
+  height: min(65vw, 950px);
+  bottom: -20%;
+  left: -12%;
+  background: radial-gradient(circle, rgba(26,107,107,0.16) 0%, rgba(26,107,107,0.05) 45%, transparent 70%);
+  animation: orbDrift2 25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+/* Blue orb — center */
+.orb-blue {
+  width: min(45vw, 650px);
+  height: min(45vw, 650px);
+  top: 30%;
+  left: 38%;
+  background: radial-gradient(circle, rgba(30,70,140,0.14) 0%, transparent 70%);
+  animation: orbDrift3 18s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes orbDrift1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  25%  { transform: translate(25px, -35px) scale(1.05); }
+  50%  { transform: translate(-15px, 20px) scale(0.97); }
+  75%  { transform: translate(20px, 30px) scale(1.03); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+@keyframes orbDrift2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  30%  { transform: translate(-30px, 25px) scale(1.04); }
+  60%  { transform: translate(20px, -30px) scale(0.96); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+@keyframes orbDrift3 {
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.8; }
+  40%  { transform: translate(30px, -20px) scale(1.08); opacity: 1; }
+  70%  { transform: translate(-20px, 25px) scale(0.95); opacity: 0.7; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.8; }
+}
+
+/* Legacy blob classes (kept for any component that still uses them) */
 @keyframes blobMove1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
+  33% { transform: translate(20px, -30px) scale(1.06); }
+  66% { transform: translate(-15px, 15px) scale(0.95); }
 }
 @keyframes blobMove2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-40px, 30px) scale(0.95); }
-  66% { transform: translate(20px, -40px) scale(1.05); }
+  40% { transform: translate(-25px, 20px) scale(0.97); }
+  70% { transform: translate(15px, -25px) scale(1.04); }
 }
 @keyframes blobMove3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(25px, 35px) scale(1.08); }
+  50% { transform: translate(18px, 22px) scale(1.05); }
 }
-
-.blob-1 { animation: blobMove1 12s ease-in-out infinite; }
-.blob-2 { animation: blobMove2 15s ease-in-out infinite; }
-.blob-3 { animation: blobMove3 10s ease-in-out infinite; }
+.blob-1 { animation: blobMove1 16s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; will-change: transform; }
+.blob-2 { animation: blobMove2 20s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; will-change: transform; }
+.blob-3 { animation: blobMove3 14s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; will-change: transform; }
 
 /* Scroll chevron bounce */
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); opacity: 1; }
-  50% { transform: translateY(8px); opacity: 0.5; }
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(7px); opacity: 0.3; }
 }
-.bounce-slow { animation: bounce 2s ease-in-out infinite; }
+.bounce-slow { animation: bounce 2.2s ease-in-out infinite; }
+
 
 /* Masonry gallery */
 .masonry-grid {
