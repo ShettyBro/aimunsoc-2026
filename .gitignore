@@ -57,3 +57,6 @@ coverage/
 # ─── Misc ─────────────────────────────────────────────────
 *.local
 .cache/
+
+.vercel
+.env*.local
