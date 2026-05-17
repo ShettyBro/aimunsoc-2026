@@ -90,9 +90,20 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-gold/10 pt-6 text-center">
+        <div className="border-t border-gold/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-center">
           <p className="text-muted text-xs">
-            © 2026 AIMUNSOC · Acharya Institutes · All rights reserved.
+            © 2026 AIMUNSOC · Acharya Institutes
+          </p>
+          <p className="text-muted text-xs">
+            Developed by{' '}
+            <a
+              href="https://www.sudeepbro.works/homepage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold hover:text-gold-light transition-colors duration-200 font-semibold"
+            >
+              ShettyBro
+            </a>
           </p>
         </div>
       </div>
