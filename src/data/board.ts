@@ -15,6 +15,7 @@ export const currentBoard: BoardMember[] = [
   { name: 'Mr. Krishna Kabir Reddy Basani', position: 'Managing Director', image: '/TheBoard/krishna-kabir.jpg' },
   { name: 'Dr. Prashanth K', position: 'Faculty Co-Ordinator', image: '/TheBoard/prashanth-k.jpg' },
   { name: 'Prof. Tejas K', position: 'Assistant Director - Student Activities', image: '/TheBoard/tejas-k.jpg' },
+  { name: 'Sheela Maharajpet', position: 'Co-curricular Co-ordinator', image: '/TheBoard/Sheela Maharajpet.webp' },
   { name: 'Bhuvin Anil', position: 'President', image: '/TheBoard/bhuvin-anil.jpg' },
   { name: 'Amoolya Sreenath', position: 'Vice President', image: '/TheBoard/amoolya-sreenath.jpg' },
   { name: 'Samuel Moses Giddion Zachariah Samson', position: 'Creator In-Chief', image: '/TheBoard/samuel-moses.jpg' },
