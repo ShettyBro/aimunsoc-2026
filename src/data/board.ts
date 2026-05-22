@@ -43,6 +43,7 @@ export const formerBoard: BoardMember[] = [
 
 // ── Secretariat (AiCon 2026) ──────────────────────────────────────────────────
 export const secretariat: SecretariatMember[] = [
+  { name: 'Dr. Prashanth K', position: 'Faculty In-Charge', email: 'faculty@aimunsoc.org' },
   { name: 'Bhuvin Anil', position: 'Secretary General', email: 'sg@aimunsoc.org' },
   { name: 'Samuel Moses Giddion Zachariah Samson', position: 'Deputy Secretary General', email: 'dsg@aimunsoc.org' },
   { name: 'Anushka Maneesh Rai', position: 'Director General', email: 'dg@aimunsoc.org' },

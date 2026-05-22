@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Instagram, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, MapPin, Instagram, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import api from '../utils/api';
 
@@ -93,9 +93,27 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-muted text-xs uppercase tracking-widest mb-1">Instagram</p>
-                  <p className="text-white group-hover:text-gold transition-colors text-sm">
-                    @aimunsoc
-                  </p>
+                  <p className="text-white group-hover:text-gold transition-colors text-sm">@aimunsoc</p>
+                </div>
+              </a>
+
+              <a href="tel:+917406862828" className="flex items-start gap-4 group">
+                <div className="bg-gold/10 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                  <Phone className="text-gold" size={18} />
+                </div>
+                <div>
+                  <p className="text-muted text-xs uppercase tracking-widest mb-1">Dr. Prashanth K</p>
+                  <p className="text-white group-hover:text-gold transition-colors text-sm">+91 74068 62828</p>
+                </div>
+              </a>
+
+              <a href="tel:+916385599477" className="flex items-start gap-4 group">
+                <div className="bg-gold/10 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
+                  <Phone className="text-gold" size={18} />
+                </div>
+                <div>
+                  <p className="text-muted text-xs uppercase tracking-widest mb-1">Bhuvin Anil (Secretary General)</p>
+                  <p className="text-white group-hover:text-gold transition-colors text-sm">+91 63855 99477</p>
                 </div>
               </a>
             </div>

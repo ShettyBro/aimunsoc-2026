@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-serif text-7xl md:text-9xl font-bold text-white leading-none mb-4"
+          className="font-serif text-7xl md:text-9xl font-bold text-white leading-none mb-2"
         >
           AiCon 2026
         </motion.h1>
@@ -90,10 +90,19 @@ const HeroSection: React.FC = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-gold/70 text-sm uppercase tracking-[0.2em] font-sans mb-2"
+        >
+          III Edition
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
           className="text-muted text-xl italic font-sans mb-10"
         >
-          Debate · Diplomacy · Distinction.
+          Diplomacy through Cooperation
         </motion.p>
 
         <motion.div

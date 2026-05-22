@@ -11,12 +11,26 @@ export const DELEGATION_TIERS = [
   { min: 25, max: Infinity, perHead: 1400 },
 ];
 
+// ── Conference Theme ───────────────────────────────────────────────────────────
+export const CONFERENCE_THEME = 'Diplomacy through Cooperation';
+export const CONFERENCE_EDITION = 'III Edition';
+
+// ── Prize Money (AiCon 2026) ──────────────────────────────────────────────────
+export const PRIZES = [
+  { award: 'Best Delegation',        amount: 15000 },
+  { award: 'Best Delegate',          amount: 10000 },
+  { award: 'High Commendation',      amount: 7000  },
+  { award: 'Commendable Delegate',   amount: 5000  },
+  { award: 'Best Reporter',          amount: 8000  },
+  { award: 'Commendable Reporter',   amount: 6000  },
+];
+
 // Reads from VITE_CONFERENCE_DATE env var — update in Vercel dashboard without redeploying
-// Format: YYYY-MM-DD  e.g. "2026-09-15"
+// Format: YYYY-MM-DD  e.g. "2026-07-16"
 const _rawDate = import.meta.env.VITE_CONFERENCE_DATE as string;
 export const CONFERENCE_DATE = _rawDate
   ? new Date(`${_rawDate}T09:00:00`)
-  : new Date('2026-09-15T09:00:00'); // fallback
+  : new Date('2026-07-16T09:00:00'); // AiCon '26 — July 16–18, 2026
 
 export const PAYMENT_URL = import.meta.env.VITE_PAYMENT_URL as string || 'https://www.acharyaerptech.in/ExternalPayment/179';
 
