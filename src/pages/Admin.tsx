@@ -139,25 +139,35 @@ const Admin: React.FC = () => {
 
         {/* Content area */}
         <div className="flex-1 overflow-auto">
-          {loading && !data && (
-            <div className="flex items-center justify-center py-40 gap-3 text-muted">
-              <Loader2 size={22} className="animate-spin text-gold" /> Loading data...
-            </div>
-          )}
+        {/* Thin loading bar — shows during refresh without wiping content */}
+        {loading && (
+          <div className="h-0.5 bg-gold/20 w-full">
+            <div className="h-full bg-gold animate-pulse w-full" />
+          </div>
+        )}
 
-          {error && (
-            <div className="m-4 sm:m-8 flex items-center gap-3 bg-danger/10 border border-danger/20 text-danger rounded-xl px-5 py-4 text-sm">
-              <ShieldAlert size={18} className="shrink-0" /> {error}
-            </div>
-          )}
+        {/* Initial load spinner — only when no data yet */}
+        {loading && !data && (
+          <div className="flex items-center justify-center py-40 gap-3 text-muted">
+            <Loader2 size={22} className="animate-spin text-gold" /> Loading data...
+          </div>
+        )}
 
-          {!loading && !error && data && (
-            <>
-              {view === 'dashboard'     && <DashboardView stats={data.stats} individual={data.individual} delegation={data.delegation} />}
-              {view === 'registrations' && <RegistrationsView individual={data.individual} delegation={data.delegation} />}
-              {view === 'messages'      && <MessagesView contacts={data.contacts} />}
-            </>
-          )}
+        {/* Error — only show if no data (don't wipe existing data on refresh error) */}
+        {error && !data && (
+          <div className="m-4 sm:m-8 flex items-center gap-3 bg-danger/10 border border-danger/20 text-danger rounded-xl px-5 py-4 text-sm">
+            <ShieldAlert size={18} className="shrink-0" /> {error}
+          </div>
+        )}
+
+        {/* Views — render whenever data exists, even while refreshing */}
+        {data && (
+          <>
+            {view === 'dashboard'     && <DashboardView stats={data.stats} individual={data.individual} delegation={data.delegation} />}
+            {view === 'registrations' && <RegistrationsView individual={data.individual} delegation={data.delegation} />}
+            {view === 'messages'      && <MessagesView contacts={data.contacts} />}
+          </>
+        )}
         </div>
       </div>
     </div>
