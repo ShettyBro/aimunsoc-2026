@@ -20,10 +20,10 @@ const AdminLogin: React.FC = () => {
     setLoading(true);
 
     try {
-      const res = await api.post('/admin/login', { username, password });
+      const res = await api.post('/ad/login', { username, password });
       const { token, username: user, expiresIn } = res.data;
       saveSession(token, user, expiresIn);
-      navigate('/admin', { replace: true });
+      navigate('/ad', { replace: true });
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Login failed. Check your credentials.';
       setError(msg);

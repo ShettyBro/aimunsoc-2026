@@ -28,7 +28,7 @@ function ScrollToTop() {
 // ── Protect /admin — redirect to login if no valid token ─────────────────────
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (!isLoggedIn()) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/ad-login" replace />;
   }
   return <>{children}</>;
 };
@@ -60,9 +60,9 @@ function App() {
       <GlobalBackground />
       <Routes>
         {/* ── Admin routes (no Navbar/Footer) ───── */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/ad-login" element={<AdminLogin />} />
         <Route
-          path="/admin"
+          path="/ad"
           element={
             <ProtectedRoute>
               <Admin />

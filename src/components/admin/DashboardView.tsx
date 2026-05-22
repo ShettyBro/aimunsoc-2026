@@ -73,14 +73,14 @@ const DashboardView: React.FC<Props> = ({ stats, individual, delegation }) => {
   ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 6);
 
   return (
-    <div className="p-8 space-y-8">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8">
       <div>
         <h1 className="font-serif text-3xl text-white mb-1">Dashboard</h1>
         <p className="text-muted text-sm">AiCon 2026 registration overview</p>
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-4">
         <StatCard delay={0} label="Total Registrations" value={stats.totalIndividual + stats.totalDelegation}
           icon={Users} color="bg-gold/15 text-gold"
           sub={`${stats.totalIndividual} individual · ${stats.totalDelegation} delegations`} />
@@ -136,15 +136,15 @@ const DashboardView: React.FC<Props> = ({ stats, individual, delegation }) => {
         ) : (
           <div className="space-y-3">
             {recent.map((r) => (
-              <div key={r.id} className="flex items-center justify-between py-2.5 border-b border-white/5 last:border-0">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className={`w-2 h-2 rounded-full shrink-0 ${r._type === 'Individual' ? 'bg-gold' : 'bg-emerald-400'}`} />
+              <div key={r.id} className="flex items-start sm:items-center justify-between py-2.5 border-b border-white/5 last:border-0 gap-2">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className={`w-2 h-2 rounded-full shrink-0 mt-1 sm:mt-0 ${r._type === 'Individual' ? 'bg-gold' : 'bg-emerald-400'}`} />
                   <div className="min-w-0">
                     <p className="text-white text-sm font-sans truncate">{r.fullName || r.headDelegateName}</p>
                     <p className="text-muted text-xs truncate">{r.institution} · {r._type}</p>
                   </div>
                 </div>
-                <div className="text-right shrink-0 ml-4">
+                <div className="text-right shrink-0">
                   <p className="text-gold text-sm font-semibold">₹{(r.totalAmount || 0).toLocaleString('en-IN')}</p>
                   <p className="text-muted text-xs">{new Date(r.createdAt).toLocaleDateString('en-IN')}</p>
                 </div>

@@ -136,7 +136,7 @@ const RegistrationsView: React.FC<Props> = ({ individual, delegation }) => {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8">
       {/* Header */}
       <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
         <div>
@@ -145,17 +145,17 @@ const RegistrationsView: React.FC<Props> = ({ individual, delegation }) => {
         </div>
 
         {/* Export buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => exportExcel(individual, delegation)}
-            className="flex items-center gap-2 bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 px-4 py-2.5 rounded-lg hover:bg-emerald-600/30 transition-all text-sm font-semibold"
+            className="flex items-center gap-2 bg-emerald-600/20 border border-emerald-500/30 text-emerald-400 px-3 py-2 rounded-lg hover:bg-emerald-600/30 transition-all text-sm font-semibold"
           >
             <FileSpreadsheet size={15} />
-            Export Excel (.xlsx)
+            <span className="hidden sm:inline">Export</span> Excel
           </button>
           <button
             onClick={exportCSV}
-            className="flex items-center gap-2 border border-white/10 text-white/60 hover:text-gold hover:border-gold/30 px-4 py-2.5 rounded-lg transition-all text-sm"
+            className="flex items-center gap-2 border border-white/10 text-white/60 hover:text-gold hover:border-gold/30 px-3 py-2 rounded-lg transition-all text-sm"
           >
             <Download size={14} /> CSV
           </button>
@@ -176,10 +176,10 @@ const RegistrationsView: React.FC<Props> = ({ individual, delegation }) => {
             </button>
           ))}
         </div>
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
-            className="bg-[#0A1628] border border-white/10 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 focus:outline-none focus:border-gold/50 w-64 placeholder:text-muted/50"
+            className="bg-[#0A1628] border border-white/10 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 focus:outline-none focus:border-gold/50 w-full sm:w-64 placeholder:text-muted/50"
             placeholder="Search name, college, TX ID..."
             value={search}
             onChange={e => setSearch(e.target.value)}

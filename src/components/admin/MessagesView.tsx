@@ -22,16 +22,16 @@ const MessagesView: React.FC<Props> = ({ contacts }) => {
   );
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-6 lg:p-8">
       <div className="flex items-start justify-between mb-6 flex-wrap gap-4">
         <div>
           <h1 className="font-serif text-3xl text-white mb-1">Messages</h1>
           <p className="text-muted text-sm">{contacts.length} contact form submission{contacts.length !== 1 ? 's' : ''}</p>
         </div>
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
           <input
-            className="bg-[#0A1628] border border-white/10 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 focus:outline-none focus:border-gold/50 w-64 placeholder:text-muted/50"
+            className="bg-[#0A1628] border border-white/10 text-white text-sm rounded-lg pl-9 pr-4 py-2.5 focus:outline-none focus:border-gold/50 w-full sm:w-64 placeholder:text-muted/50"
             placeholder="Search name, email, message..."
             value={search}
             onChange={e => setSearch(e.target.value)}
