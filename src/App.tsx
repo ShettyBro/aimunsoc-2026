@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -25,11 +25,14 @@ function ScrollToTop() {
   return null;
 }
 
-// ── Protect /admin — redirect to login if no valid token ─────────────────────
+// ── Protect /ad — check once on mount, not on every render ──────────────────
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  if (!isLoggedIn()) {
-    return <Navigate to="/ad-login" replace />;
-  }
+  const navigate = useNavigate();
+  const [ok] = React.useState(() => isLoggedIn());
+  React.useEffect(() => {
+    if (!ok) navigate('/ad-login', { replace: true });
+  }, [ok, navigate]);
+  if (!ok) return null;
   return <>{children}</>;
 };
 
