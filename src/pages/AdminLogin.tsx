@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Lock, User, Eye, EyeOff, AlertCircle, Shield } from 'lucide-react';
 import api from '../utils/api';
 import { saveSession } from '../utils/auth';
-import GlobalBackground from '../components/layout/GlobalBackground';
+
 
 const AdminLogin: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -36,8 +36,7 @@ const AdminLogin: React.FC = () => {
     'w-full bg-navy border border-navy-mid text-white rounded-md px-4 py-3 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors placeholder-muted';
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4">
-      <GlobalBackground />
+    <div className="relative z-[1] min-h-screen flex items-center justify-center px-4">
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

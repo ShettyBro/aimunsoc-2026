@@ -101,7 +101,7 @@ export default function Admin() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#080F1C]">
+    <div className="relative z-[1] flex min-h-screen bg-[#080F1C]">
 
       {/* Mobile overlay */}
       {sidebarOpen && (
