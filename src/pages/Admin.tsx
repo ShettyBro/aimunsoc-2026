@@ -29,57 +29,74 @@ const Admin: React.FC = () => {
   const [error, setError] = useState('');
   const [timeLeft, setTimeLeft] = useState(getMsUntilExpiry());
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const logoutTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const tickTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // ── Stable refs — always hold the latest value without being deps ──────────
+  const mountedRef   = useRef(true);
+  const navigateRef  = useRef(navigate);
+  const logoutTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const tickTimerRef   = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Keep navigateRef current on every render
+  navigateRef.current = navigate;
+
+  // ── Logout — stable, uses refs so it never changes identity ───────────────
   const logout = useCallback((reason = '') => {
     clearSession();
-    if (logoutTimer.current) clearTimeout(logoutTimer.current);
-    if (tickTimer.current) clearInterval(tickTimer.current);
-    navigate('/ad-login', { replace: true, state: { reason } });
-  }, [navigate]);
+    if (logoutTimerRef.current) clearTimeout(logoutTimerRef.current);
+    if (tickTimerRef.current)   clearInterval(tickTimerRef.current);
+    navigateRef.current('/ad-login', { replace: true, state: { reason } });
+  }, []); // no deps — uses refs
 
-  // Auth guard + auto-logout
+  // Keep a ref to logout so fetchData can use it without being a dependency
+  const logoutRef = useRef(logout);
+  logoutRef.current = logout;
+
+  // ── Auth guard + auto-logout — runs once on mount ─────────────────────────
   useEffect(() => {
     if (!getToken()) { navigate('/ad-login', { replace: true }); return; }
     const remaining = getMsUntilExpiry();
     if (remaining <= 0) { logout('expired'); return; }
-    logoutTimer.current = setTimeout(() => logout('expired'), remaining);
-    tickTimer.current = setInterval(() => {
+
+    logoutTimerRef.current = setTimeout(() => logout('expired'), remaining);
+    tickTimerRef.current = setInterval(() => {
       const left = getMsUntilExpiry();
       setTimeLeft(left);
       if (left <= 0) logout('expired');
     }, 60_000);
     setTimeLeft(remaining);
+
     return () => {
-      if (logoutTimer.current) clearTimeout(logoutTimer.current);
-      if (tickTimer.current) clearInterval(tickTimer.current);
+      if (logoutTimerRef.current) clearTimeout(logoutTimerRef.current);
+      if (tickTimerRef.current)   clearInterval(tickTimerRef.current);
     };
-  }, [logout, navigate]);
+  }, []); // intentionally empty — runs once; uses refs for stable values
 
-  const mountedRef = useRef(true);
-
+  // ── fetchData — stable identity (no deps), uses logoutRef for logout ───────
   const fetchData = useCallback(async () => {
-    setLoading(true); setError('');
+    setLoading(true);
+    setError('');
     try {
       const res = await api.get('/ad/registrations');
       if (mountedRef.current) setData(res.data);
     } catch (err: any) {
       if (!mountedRef.current) return;
-      if (err?.response?.status === 401) logout(err?.response?.data?.expired ? 'expired' : 'unauthorized');
-      else setError(err?.response?.data?.message || 'Failed to load data. Please refresh.');
+      if (err?.response?.status === 401) {
+        logoutRef.current(err?.response?.data?.expired ? 'expired' : 'unauthorized');
+      } else {
+        setError(err?.response?.data?.message || 'Failed to load data. Please refresh.');
+      }
     } finally {
       if (mountedRef.current) setLoading(false);
     }
-  }, [logout]);
+  }, []); // no deps — uses refs; identity is permanently stable
 
+  // ── Fetch once on mount ────────────────────────────────────────────────────
   useEffect(() => {
     mountedRef.current = true;
     fetchData();
     return () => { mountedRef.current = false; };
-  }, [fetchData]);
+  }, []); // intentionally empty — fetchData is stable; we only want this once
 
-  // Close sidebar on route/view change on mobile
   const handleViewChange = (v: AdminView) => {
     setView(v);
     setSidebarOpen(false);
@@ -88,7 +105,7 @@ const Admin: React.FC = () => {
   return (
     <div className="flex min-h-screen bg-[#080F1C]">
 
-      {/* ── Mobile overlay backdrop ─────────────────────────────── */}
+      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
@@ -96,7 +113,7 @@ const Admin: React.FC = () => {
         />
       )}
 
-      {/* ── Sidebar ─────────────────────────────────────────────── */}
+      {/* Sidebar */}
       <div className={`
         fixed inset-y-0 left-0 z-50 transition-transform duration-300 ease-in-out
         lg:static lg:translate-x-0 lg:z-auto
@@ -112,12 +129,11 @@ const Admin: React.FC = () => {
         />
       </div>
 
-      {/* ── Main content ─────────────────────────────────────────── */}
+      {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-        {/* Top bar — always visible, adapts per breakpoint */}
+        {/* Top bar */}
         <div className="sticky top-0 z-30 bg-[#060E1A]/95 backdrop-blur-sm border-b border-gold/10 px-4 py-3 flex items-center justify-between gap-3">
-          {/* Left: hamburger (mobile) + title */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -133,7 +149,6 @@ const Admin: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: refresh */}
           <button
             onClick={fetchData}
             disabled={loading}
@@ -146,35 +161,36 @@ const Admin: React.FC = () => {
 
         {/* Content area */}
         <div className="flex-1 overflow-auto">
-        {/* Thin loading bar — shows during refresh without wiping content */}
-        {loading && (
-          <div className="h-0.5 bg-gold/20 w-full">
-            <div className="h-full bg-gold animate-pulse w-full" />
-          </div>
-        )}
 
-        {/* Initial load spinner — only when no data yet */}
-        {loading && !data && (
-          <div className="flex items-center justify-center py-40 gap-3 text-muted">
-            <Loader2 size={22} className="animate-spin text-gold" /> Loading data...
-          </div>
-        )}
+          {/* Thin gold bar during any loading */}
+          {loading && (
+            <div className="h-0.5 bg-gold/20 w-full">
+              <div className="h-full bg-gold animate-pulse w-full" />
+            </div>
+          )}
 
-        {/* Error — only show if no data (don't wipe existing data on refresh error) */}
-        {error && !data && (
-          <div className="m-4 sm:m-8 flex items-center gap-3 bg-danger/10 border border-danger/20 text-danger rounded-xl px-5 py-4 text-sm">
-            <ShieldAlert size={18} className="shrink-0" /> {error}
-          </div>
-        )}
+          {/* Spinner — first load only (no data yet) */}
+          {loading && !data && (
+            <div className="flex items-center justify-center py-40 gap-3 text-muted">
+              <Loader2 size={22} className="animate-spin text-gold" /> Loading data...
+            </div>
+          )}
 
-        {/* Views — render whenever data exists, even while refreshing */}
-        {data && (
-          <>
-            {view === 'dashboard'     && <DashboardView stats={data.stats} individual={data.individual} delegation={data.delegation} />}
-            {view === 'registrations' && <RegistrationsView individual={data.individual} delegation={data.delegation} />}
-            {view === 'messages'      && <MessagesView contacts={data.contacts} />}
-          </>
-        )}
+          {/* Error — only when there's no data to show */}
+          {error && !data && (
+            <div className="m-4 sm:m-8 flex items-center gap-3 bg-danger/10 border border-danger/20 text-danger rounded-xl px-5 py-4 text-sm">
+              <ShieldAlert size={18} className="shrink-0" /> {error}
+            </div>
+          )}
+
+          {/* Views — show whenever data exists, even during background refresh */}
+          {data && (
+            <>
+              {view === 'dashboard'     && <DashboardView stats={data.stats} individual={data.individual} delegation={data.delegation} />}
+              {view === 'registrations' && <RegistrationsView individual={data.individual} delegation={data.delegation} />}
+              {view === 'messages'      && <MessagesView contacts={data.contacts} />}
+            </>
+          )}
         </div>
       </div>
     </div>
