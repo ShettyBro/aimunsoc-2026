@@ -57,20 +57,27 @@ const Admin: React.FC = () => {
     };
   }, [logout, navigate]);
 
+  const mountedRef = useRef(true);
+
   const fetchData = useCallback(async () => {
     setLoading(true); setError('');
     try {
       const res = await api.get('/ad/registrations');
-      setData(res.data);
+      if (mountedRef.current) setData(res.data);
     } catch (err: any) {
+      if (!mountedRef.current) return;
       if (err?.response?.status === 401) logout(err?.response?.data?.expired ? 'expired' : 'unauthorized');
       else setError(err?.response?.data?.message || 'Failed to load data. Please refresh.');
     } finally {
-      setLoading(false);
+      if (mountedRef.current) setLoading(false);
     }
   }, [logout]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => {
+    mountedRef.current = true;
+    fetchData();
+    return () => { mountedRef.current = false; };
+  }, [fetchData]);
 
   // Close sidebar on route/view change on mobile
   const handleViewChange = (v: AdminView) => {
