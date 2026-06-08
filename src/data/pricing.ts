@@ -17,12 +17,14 @@ export const CONFERENCE_EDITION = 'III Edition';
 
 // ── Prize Money (AiCon 2026) ──────────────────────────────────────────────────
 export const PRIZES = [
-  { award: 'Best Delegation',        amount: 15000 },
-  { award: 'Best Delegate',          amount: 10000 },
-  { award: 'High Commendation',      amount: 7000  },
-  { award: 'Commendable Delegate',   amount: 5000  },
-  { award: 'Best Reporter',          amount: 8000  },
-  { award: 'Commendable Reporter',   amount: 6000  },
+  { award: 'Best Delegation',          amount: 15000 },
+  { award: 'Best Delegate',            amount: 10000 },
+  { award: 'High Commendation',        amount: 7000  },
+  { award: 'Commendable Delegate',     amount: 5000  },
+  { award: 'Best Reporter',            amount: 8000  },
+  { award: 'Commendable Reporter',     amount: 6000  },
+  { award: 'Best Photographer',        amount: 8000  },
+  { award: 'Commendable Photographer', amount: 6000  },
 ];
 
 // Reads from VITE_CONFERENCE_DATE env var — update in Vercel dashboard without redeploying

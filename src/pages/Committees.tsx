@@ -56,9 +56,23 @@ const CommitteeModal: React.FC<CommitteeModalProps> = ({ committee, onClose }) =
           </div>
 
           {/* Description */}
-          <p className="text-muted text-sm leading-relaxed mb-6 whitespace-pre-line">
+          <p className="text-muted text-sm leading-relaxed mb-4 whitespace-pre-line">
             {committee.description}
           </p>
+
+          {/* Freeze Date & Venue */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {committee.freezeDate && (
+              <div className="flex items-center gap-2 bg-gold/10 border border-gold/30 rounded-lg px-3 py-1.5">
+                <span className="text-gold text-xs uppercase tracking-widest font-sans">Freeze Date</span>
+                <span className="text-white text-xs font-semibold">{committee.freezeDate}</span>
+              </div>
+            )}
+            <div className="flex items-center gap-2 bg-navy/60 border border-white/10 rounded-lg px-3 py-1.5">
+              <span className="text-muted text-xs uppercase tracking-widest font-sans">Venue</span>
+              <span className="text-white text-xs font-semibold">{committee.venue}</span>
+            </div>
+          </div>
 
           {/* Chairs */}
           {committee.chairs.length > 0 && (

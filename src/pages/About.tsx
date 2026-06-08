@@ -77,7 +77,7 @@ const About: React.FC = () => {
             The society transcended academic divisions, weaving together students from diverse colleges into a unified, dynamic forum for future diplomats. Today, it proudly ranks among Bangalore's most promising and rapidly rising MUN societies.
           </p>
           <p className="text-white/80 leading-relaxed text-base">
-            A defining milestone came in July 2024, when AIMUNSOC unveiled the first edition of AiCon — its flagship conference that set a new benchmark in quality, organization, and engagement. Guided by the wisdom of experienced board members and inspired by the steadfast support of the visionary Managing Director — a former MUN delegate himself — AiCon marked the society's bold leap into the wider MUN landscape.
+            A defining milestone came in July 2024, when AIMUNSOC unveiled the first edition of AiCon — its flagship conference that set a new benchmark in quality, organization, and engagement. Following the success of that inaugural conference, AIMUNSOC proudly presents <strong className="text-white">AiCon'26</strong> — the <strong className="text-white">Third Edition</strong> of its flagship event, promising dynamic diplomacy, engaging dialogue, and meaningful discovery.
           </p>
         </motion.div>
 
@@ -113,7 +113,7 @@ const About: React.FC = () => {
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 mb-16">
-          {[{ value: '300+', label: 'Delegates' }, { value: '7', label: 'Committees' }, { value: '3 Days', label: 'of Diplomacy' }].map((s) => (
+          {[{ value: '300+', label: 'Delegates' }, { value: '9', label: 'Committees' }, { value: '3 Days', label: 'of Diplomacy' }].map((s) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center glass-card py-8">
               <p className="font-serif text-4xl text-gold font-bold">{s.value}</p>
               <p className="text-muted text-sm uppercase tracking-widest mt-1">{s.label}</p>

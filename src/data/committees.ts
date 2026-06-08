@@ -12,6 +12,7 @@ export interface Committee {
   image: string;
   backgroundGuide: string;
   venue: string;
+  freezeDate?: string;
   chairs: CommitteeMemberRole[];
   moderators: CommitteeMemberRole[];
 }
@@ -25,26 +26,32 @@ export const committees: Committee[] = [
     image: '/CommitteeLogos/1.png',
     backgroundGuide: '/docs/UNSC.pdf',
     venue: 'Library Seminar Hall',
+    freezeDate: 'August 1948',
     chairs: [
-      { name: 'Adithya Krishna Menon', role: 'Chair' },
-      { name: 'Safiullah Shaikh', role: 'Vice-Chair' },
+      { name: 'Aditya Krishna Menon', role: 'Chairperson' },
+      { name: 'Dhruv Bajaj', role: 'Vice Chairperson' },
+      { name: 'Jayanth N', role: 'Rapporteur' },
     ],
-    moderators: [{ name: 'Impana Rakesh', role: 'Moderator' }],
+    moderators: [],
     description:
-      'Charged with global peacekeeping, the UNSC navigates the legal and diplomatic terrain surrounding competing claims to governmental authority in Venezuela. Delegates must balance sovereignty with global stability in crafting resolutions that uphold international law.',
+      'Agenda: Operation Polo. Set in August 1948, delegates navigate the complex diplomatic and military landscape surrounding the integration of Hyderabad State into the Indian Union. The UNSC debates sovereignty, use of force, and the application of international law in one of history\'s pivotal post-partition crises.',
   },
   {
     id: 'disec',
-    name: 'DISEC',
+    name: 'UNGA-DISEC',
     fullName: 'Disarmament and International Security Committee',
     type: 'international',
     image: '/CommitteeLogos/2.png',
     backgroundGuide: '/docs/DISEC.pdf',
     venue: 'Library Conference Room',
-    chairs: [],
+    chairs: [
+      { name: 'Anish G', role: 'Chairperson' },
+      { name: 'Smrithi Krishna', role: 'Vice Chairperson' },
+      { name: 'Udeern Srihari', role: 'Rapporteur' },
+    ],
     moderators: [],
     description:
-      'Focused on disarmament issues and international security threats. Delegates debate de-nuclearization of the Middle East and address emerging gaps in the Non-Proliferation Treaty (NPT) framework, crafting cooperative strategies to uphold regional security.',
+      'Agenda: Countering the Threat Posed by Improvised Explosive Devices (IEDs). Delegates address the proliferation and devastating impact of IEDs on civilian populations and global security, crafting multilateral frameworks for detection, prevention, and international cooperation.',
   },
   {
     id: 'unhrc',
@@ -54,42 +61,67 @@ export const committees: Committee[] = [
     image: '/CommitteeLogos/3.png',
     backgroundGuide: '/docs/UNHRC.pdf',
     venue: 'MBA Auditorium',
-    chairs: [{ name: 'Phani Sreevatsa H A', role: 'Chair' }],
-    moderators: [
-      { name: 'Dhvani Pandey', role: 'Co-Vice Chair' },
-      { name: 'Heena Noor', role: 'Co-Vice Chair' },
+    chairs: [
+      { name: 'Alby Mathew', role: 'Chairperson' },
+      { name: 'Sreehari R Pillai', role: 'Co-Vice Chairperson' },
+      { name: 'Shriya Asija', role: 'Co-Vice Chairperson' },
     ],
+    moderators: [],
     description:
-      'Delves into pressing human rights crises in conflict zones — Sudan and Gaza. Delegates examine violations, evaluate humanitarian interventions, and propose meaningful frameworks for justice, accountability, and recovery in war-torn regions.',
+      'Agenda: Upholding Human Rights During Armed Conflict. Delegates examine violations of international humanitarian law in active conflict zones, evaluate existing protection mechanisms, and propose meaningful frameworks for accountability, justice, and the protection of civilians in war.',
   },
   {
-    id: 'unodc',
-    name: 'UNODC',
-    fullName: 'UN Office on Drugs and Crime',
+    id: 'unw',
+    name: 'UN Women',
+    fullName: 'United Nations Women',
     type: 'international',
     image: '/CommitteeLogos/4.png',
-    backgroundGuide: '/docs/UNODC.pdf',
+    backgroundGuide: '/docs/UNW.pdf',
     venue: 'AIGS Seminar Hall',
-    chairs: [],
-    moderators: [],
-    description:
-      'Addressing global challenges of drug trafficking, organized crime, and corruption. Delegates craft international frameworks for prevention, enforcement, and justice — with a focus on victim-centered policies, transnational cooperation, and rehabilitation.',
-  },
-  {
-    id: 'ccc',
-    name: 'CCC',
-    fullName: 'Continuous Crisis Committee',
-    type: 'international',
-    image: '/CommitteeLogos/2.png',
-    backgroundGuide: '/docs/CCC.pdf',
-    venue: 'Civil Seminar Hall',
     chairs: [
-      { name: 'Abbas Ahmed', role: 'Co-Chair' },
-      { name: 'Aakash Das', role: 'Co-Chair' },
+      { name: 'Noel Aniket Nayak', role: 'Chairperson' },
+      { name: 'Maanvi S V', role: 'Co-Chairperson' },
+      { name: 'Haniya S', role: 'Vice Chairperson' },
     ],
     moderators: [],
     description:
-      'A fast-paced crisis simulation set against the backdrop of the volatile 2025 Iran-Israel escalation. Delegates respond to evolving real-world scenarios, intelligence reports, and dynamic policymaking — navigating a high-stakes standoff teetering on the edge of global conflict.',
+      "Agenda: Addressing Rising Threats to Women's Safety in the Age of AI Deepfakes and Migration Crises During Regional Conflict. Delegates confront the intersection of technology-enabled gender-based violence and the heightened vulnerability of women and girls displaced by conflict and migration.",
+  },
+  {
+    id: 'jcc-india',
+    name: 'JCC – India',
+    fullName: 'Joint Crisis Committee – Indian Cabinet',
+    type: 'national',
+    image: '/CommitteeLogos/5.png',
+    backgroundGuide: '/docs/JCC.pdf',
+    venue: 'Civil Seminar Hall',
+    freezeDate: '3 December 1971',
+    chairs: [
+      { name: 'Shreyas D B', role: 'Chairperson' },
+      { name: 'Anirudh R', role: 'Co-Chairperson' },
+      { name: 'Arjun Singh', role: 'Rapporteur' },
+    ],
+    moderators: [],
+    description:
+      'Agenda: The Third Indo-Pakistan War (Freeze Date: 3 December 1971). As war erupts, the Indian Cabinet must coordinate military strategy, international diplomacy, and domestic stability. Delegates navigate real-time crisis updates in a high-stakes simulation of one of South Asia\'s most consequential conflicts.',
+  },
+  {
+    id: 'jcc-pakistan',
+    name: 'JCC – Pakistan',
+    fullName: 'Joint Crisis Committee – Pakistan Cabinet',
+    type: 'national',
+    image: '/CommitteeLogos/5.png',
+    backgroundGuide: '/docs/JCC.pdf',
+    venue: 'Civil Seminar Hall',
+    freezeDate: '3 December 1971',
+    chairs: [
+      { name: 'Abbas Ahmed', role: 'Chairperson' },
+      { name: 'Aditi Anand', role: 'Vice Chairperson' },
+      { name: 'Mohammed Hisham', role: 'Rapporteur' },
+    ],
+    moderators: [],
+    description:
+      'Agenda: The Third Indo-Pakistan War (Freeze Date: 3 December 1971). The Pakistan Cabinet faces a rapidly deteriorating military and political situation. Delegates must manage an evolving two-front crisis, seek international alliances, and chart a course through one of the most turbulent moments in Pakistani history.',
   },
   {
     id: 'aippm',
@@ -100,12 +132,13 @@ export const committees: Committee[] = [
     backgroundGuide: '/docs/AIPPM.pdf',
     venue: 'Mechanical Auditorium',
     chairs: [
-      { name: 'Naman Vankdari', role: 'Chair' },
-      { name: 'Anshuman Pandey', role: 'Vice-Chair' },
+      { name: 'Yashwanth Gowda', role: 'Chairperson' },
+      { name: 'Manav Dharia', role: 'Co-Chairperson' },
+      { name: 'Yuvashree K', role: 'Rapporteur' },
     ],
-    moderators: [{ name: 'Daksh Jain', role: 'Moderator' }],
+    moderators: [],
     description:
-      'Dual-agenda committee addressing two critical domestic challenges. Agenda 1: Language-based conflicts in India — implications of the 60% Kannada usage mandate in commercial establishments. Agenda 2: Surge in police harassment following new criminal laws, focusing on controversial BNSS amendments granting extended enforcement powers.',
+      'Agenda: The Indian Security Doctrine – Addressing Hybrid Warfare, Internal Destabilisation, and Cross-Border Threats. India\'s political leaders convene to debate national security strategy amid evolving threats of hybrid warfare, cyber attacks, and cross-border insurgency.',
   },
   {
     id: 'ipc',
@@ -116,11 +149,27 @@ export const committees: Committee[] = [
     backgroundGuide: '/docs/IPC.pdf',
     venue: 'MBA Boardroom',
     chairs: [
-      { name: 'Algin B Thomas', role: 'Co-International Head of Press' },
-      { name: 'Snehal Nandi', role: 'Co-International Head of Press' },
+      { name: 'Siya Anand', role: 'Head of International Press' },
+      { name: 'Prachi Prasad', role: 'Editor-in-Chief' },
     ],
     moderators: [],
     description:
-      'Covering conference proceedings and providing real-time news updates. The IPC is responsible for journalistic coverage across all committees, producing breaking news, op-eds, and live dispatches throughout the conference.',
+      'The International Press Corps covers conference proceedings in real time, producing breaking news, op-eds, interviews, and live dispatches. Reporters develop sharp journalistic instincts while shaping the narrative across all committees throughout AiCon\'26.',
+  },
+  {
+    id: 'photojournalism',
+    name: 'Photojournalism',
+    fullName: 'Photojournalism',
+    type: 'international',
+    image: '/CommitteeLogos/6.png',
+    backgroundGuide: '/docs/IPC.pdf',
+    venue: 'MBA Boardroom',
+    chairs: [
+      { name: 'Priyanshu Lahoti', role: 'Chairperson' },
+      { name: 'Impana Rakesh', role: 'Vice Chairperson' },
+    ],
+    moderators: [],
+    description:
+      'The Photojournalism committee captures the spirit of AiCon\'26 through the lens. Delegates document key moments, committees, and personalities across the conference, competing for Best Photographer while building a visual record of the event.',
   },
 ];
