@@ -142,8 +142,8 @@ const IndividualForm: React.FC = () => {
                 <FieldError msg={errors.fullName} />
               </div>
               <div>
-                <label className={labelCls}>Age * <span className="text-gold text-xs">(must be 18+)</span></label>
-                <input type="number" min={18} max={80} className={`${inputCls} ${errors.age ? 'border-danger' : ''}`} placeholder="Your age (18+)" value={form.age} onChange={(e) => set('age', e.target.value)} />
+                <label className={labelCls}>Age *</label>
+                <input type="number" min={5} max={80} className={`${inputCls} ${errors.age ? 'border-danger' : ''}`} placeholder="Your age" value={form.age} onChange={(e) => set('age', e.target.value)} />
                 <FieldError msg={errors.age} />
               </div>
               <InstitutionInput
