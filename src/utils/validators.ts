@@ -32,8 +32,7 @@ export function validateAge(age: string): string {
   if (!trimmed) return 'Age is required.';
   if (!/^\d+$/.test(trimmed)) return 'Age must be a valid number.';
   const n = parseInt(trimmed, 10);
-  if (n < 18) return 'You must be at least 18 years old to register.';
-  if (n > 80) return 'Please enter a valid age.';
+  if (n < 5 || n > 80) return 'Please enter a valid age.';
   return '';
 }
 
