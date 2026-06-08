@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Crown, Users, X, Download, ExternalLink } from 'lucide-react';
+import { Crown, Users, X, ExternalLink } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import { committees, Committee } from '../data/committees';
 import { MATRIX_URL } from '../data/pricing';
@@ -108,14 +108,7 @@ const CommitteeModal: React.FC<CommitteeModalProps> = ({ committee, onClose }) =
             </div>
           )}
 
-          <a
-            href={committee.backgroundGuide}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gold text-navy font-semibold px-5 py-2.5 rounded-md hover:bg-gold-light transition-all text-sm"
-          >
-            <Download size={15} /> Download Background Guide
-          </a>
+
         </motion.div>
       </motion.div>
     </AnimatePresence>
