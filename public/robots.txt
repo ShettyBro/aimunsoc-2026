@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block admin pages from indexing
+Disallow: /ad
+Disallow: /ad-login
+
+Sitemap: https://aimunsoc-2026.vercel.app/sitemap.xml

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { usePageTitle } from '../hooks/usePageTitle';
 import HeroSection from '../components/home/HeroSection';
 import StatsBar from '../components/home/StatsBar';
 import FeaturesSection from '../components/home/FeaturesSection';
@@ -118,6 +119,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ images, title, interval = 3500 })
 
 // ── Home Page ────────────────────────────────────────────────────────────────
 const Home: React.FC = () => {
+  usePageTitle();
   return (
     <div>
       <HeroSection />

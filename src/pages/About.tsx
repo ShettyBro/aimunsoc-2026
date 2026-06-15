@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users, Award, ExternalLink, Trophy, Clock } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
@@ -62,6 +63,7 @@ const timeline = [
 ];
 
 const About: React.FC = () => {
+  usePageTitle('About AiCon 2026');
   return (
     <div>
       <PageHero title="About AiCon 2026" subtitle="Acharya Institute's premier Model United Nations conference — III Edition." />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, AlertCircle, CreditCard, User, Users, School, UserCheck, ExternalLink } from 'lucide-react';
+import { usePageTitle } from '../hooks/usePageTitle';
 import PageHero from '../components/ui/PageHero';
 import StepIndicator from '../components/ui/StepIndicator';
 import Button from '../components/ui/Button';
@@ -24,6 +25,7 @@ import DelegationForm from '../components/registration/DelegationForm';
 type TabType = 'individual' | 'delegation';
 
 const Register: React.FC = () => {
+  usePageTitle('Register for AiCon 2026');
   const [tab, setTab] = useState<TabType>('individual');
 
   return (

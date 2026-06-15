@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import {
   Crown, Shield, ClipboardList, DollarSign, BookOpen, Star, Briefcase,
   User, UserCheck, Camera, Truck, Megaphone, Coffee, FileText, GraduationCap, Mail
@@ -54,6 +55,7 @@ const BoardCard: React.FC<{ member: BoardMember }> = ({ member }) => {
 };
 
 const Board: React.FC = () => {
+  usePageTitle('Board & Secretariat');
   const faculty = secretariat.slice(0, 2);
   const leadership = secretariat.slice(2, 4);
   const usgs = secretariat.slice(4);

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Instagram, Phone, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { usePageTitle } from '../hooks/usePageTitle';
 import PageHero from '../components/ui/PageHero';
 import api from '../utils/api';
 
 const Contact: React.FC = () => {
+  usePageTitle('Contact Us');
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');

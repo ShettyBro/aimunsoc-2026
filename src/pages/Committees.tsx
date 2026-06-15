@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Crown, Users, X, ExternalLink } from 'lucide-react';
+import { usePageTitle } from '../hooks/usePageTitle';
 import PageHero from '../components/ui/PageHero';
 import { committees, Committee } from '../data/committees';
 import { MATRIX_URL } from '../data/pricing';
@@ -126,6 +127,7 @@ const item = {
 };
 
 const Committees: React.FC = () => {
+  usePageTitle('Committees');
   const [selectedCommittee, setSelectedCommittee] = useState<Committee | null>(null);
 
   return (

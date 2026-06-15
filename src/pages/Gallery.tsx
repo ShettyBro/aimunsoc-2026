@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 
@@ -55,6 +56,7 @@ const aicon24Images: { id: number; src: string; alt: string; tag: 'aicon24' }[] 
 const galleryData = [...aicon25Images, ...aicon24Images];
 
 const Gallery: React.FC = () => {
+  usePageTitle('Gallery');
   const [activeTag, setActiveTag] = useState<Tag>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
