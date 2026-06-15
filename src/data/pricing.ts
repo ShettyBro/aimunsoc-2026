@@ -37,7 +37,7 @@ export const CONFERENCE_DATE = _rawDate
 export const PAYMENT_URL = import.meta.env.VITE_PAYMENT_URL as string || 'https://www.acharyaerptech.in/ExternalPayment/179';
 
 export const MATRIX_URL =
-  'https://docs.google.com/spreadsheets/d/1kAaJRW-4i0Q1rCkbrfyl96cd4arfVxbiYZSJR15dkmQ/edit?usp=sharing';
+  'https://docs.google.com/spreadsheets/d/1jWckulVKgORE0hABxVkxRBv_Z1mvk3q0u8Ad6DZH4dM/edit?usp=sharing';
 
 export const INDIAN_POLITICIANS = [
   'Narendra Modi', 'Rahul Gandhi', 'Amit Shah', 'Arvind Kejriwal',
