@@ -81,6 +81,9 @@ const About: React.FC = () => {
           <p className="text-white/80 leading-relaxed text-base">
             A defining milestone came in July 2024, when AIMUNSOC unveiled the first edition of AiCon — its flagship conference that set a new benchmark in quality, organization, and engagement. Following the success of that inaugural conference, AIMUNSOC proudly presents <strong className="text-white">AiCon'26</strong> — the <strong className="text-white">Third Edition</strong> of its flagship event, promising dynamic diplomacy, engaging dialogue, and meaningful discovery.
           </p>
+
+
+
         </motion.div>
 
         {/* Mission blockquote */}
