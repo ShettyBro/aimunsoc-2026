@@ -32,7 +32,7 @@ export const PRIZES = [
 const _rawDate = import.meta.env.VITE_CONFERENCE_DATE as string;
 export const CONFERENCE_DATE = _rawDate
   ? new Date(`${_rawDate}T09:00:00`)
-  : new Date('2026-07-16T09:00:00'); // AiCon '26 — July 16–18, 2026
+  : new Date('2026-08-28T09:00:00'); // AiCon '26 — August 28–30, 2026
 
 export const PAYMENT_URL = import.meta.env.VITE_PAYMENT_URL as string || 'https://www.acharyaerptech.in/ExternalPayment/179';
 

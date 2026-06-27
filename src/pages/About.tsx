@@ -9,7 +9,7 @@ import Card from '../components/ui/Card';
 import { PRIZES } from '../data/pricing';
 
 const details = [
-  { icon: Calendar, title: 'Conference Dates', content: '16th, 17th & 18th July 2026' },
+  { icon: Calendar, title: 'Conference Dates', content: '28th, 29th & 30th August 2026' },
   { icon: MapPin, title: 'Venue', content: 'Acharya Institute of Technology, Soldevanahalli, Bengaluru' },
   { icon: Users, title: 'Expected Delegates', content: '300+ delegates from colleges across South India' },
   {
@@ -20,7 +20,7 @@ const details = [
 
 const schedule = [
   {
-    day: 'Day 1', date: 'July 16th',
+    day: 'Day 1', date: 'August 28th',
     sessions: [
       { event: 'Opening Ceremony', time: '09:00 AM – 11:30 AM' },
       { event: 'Session I', time: '11:30 AM – 01:30 PM' },
@@ -31,7 +31,7 @@ const schedule = [
     ],
   },
   {
-    day: 'Day 2', date: 'July 17th',
+    day: 'Day 2', date: 'August 29th',
     sessions: [
       { event: 'Session IV', time: '09:00 AM – 10:30 AM' },
       { event: 'Break', time: '10:30 AM – 11:15 AM' },
@@ -43,7 +43,7 @@ const schedule = [
     ],
   },
   {
-    day: 'Day 3', date: 'July 18th',
+    day: 'Day 3', date: 'August 30th',
     sessions: [
       { event: 'Session VIII', time: '09:00 AM – 10:30 AM' },
       { event: 'Break', time: '10:30 AM – 11:15 AM' },
