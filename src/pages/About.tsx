@@ -86,9 +86,9 @@ const About: React.FC = () => {
         {/* Mission blockquote */}
         <motion.blockquote initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="border-l-4 border-gold pl-6 mb-16 max-w-3xl">
           <p className="font-serif text-2xl md:text-3xl text-white leading-relaxed">
-            "AiCon is not just a conference — it is a crucible where tomorrow's diplomats are forged through debate, dialogue, and determination."
+            "Calmness in preparation but boldness in execution, this should be the watchword during the moments of crisis."
           </p>
-          <footer className="text-muted text-sm mt-4 font-sans">— AIMUNSOC</footer>
+          <footer className="text-muted text-sm mt-4 font-sans">— Vinayak Damodar Savarkar</footer>
         </motion.blockquote>
 
         {/* Conference details grid */}
