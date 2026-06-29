@@ -14,8 +14,8 @@ function makeStars(count: number) {
   }));
 }
 
-// Official UN emblem used as a ghosted watermark
-const UN_EMBLEM_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/UN_emblem_blue.svg/960px-UN_emblem_blue.svg.png';
+// AiCon logo used as a ghosted watermark
+const UN_EMBLEM_URL = '/aicon logo.png';
 
 const UNEmblem: React.FC = () => (
   <img
@@ -24,8 +24,8 @@ const UNEmblem: React.FC = () => (
     aria-hidden="true"
     style={{
       position: 'absolute',
-      width: 'min(72vw, 640px)',
-      height: 'min(72vw, 640px)',
+      width: 'min(110vw, 1100px)',
+      height: 'min(110vw, 1100px)',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
