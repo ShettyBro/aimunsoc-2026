@@ -13,7 +13,7 @@ export interface IndividualFormData {
   portfolioPreference2: string;
   portfolioPreference3: string;
   accommodationRequired: boolean;
-  accommodationScheme: '2nights' | '3nights' | '';
+  accommodationScheme: string;
   transactionId: string;
 }
 
@@ -27,7 +27,7 @@ export interface DelegationFormData {
   numberOfDelegates: string;
   accommodationRequired: boolean;
   accommodationDelegates: string;
-  accommodationScheme: '2nights' | '3nights' | '';
+  accommodationScheme: string;
   transactionId: string;
 }
 

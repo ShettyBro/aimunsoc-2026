@@ -1,21 +1,14 @@
 import {
   INDIVIDUAL_BASE_FEE,
-  ACCOMMODATION_2_NIGHTS,
-  ACCOMMODATION_3_NIGHTS,
+  ACCOMMODATION_FEE,
   DELEGATION_TIERS,
 } from '../data/pricing';
 
 export function calcIndividualTotal(
-  accommodationRequired: boolean,
-  accommodationScheme: '2nights' | '3nights' | ''
+  accommodationRequired: boolean
 ): { base: number; accommodation: number; total: number } {
   const base = INDIVIDUAL_BASE_FEE;
-  let accommodation = 0;
-
-  if (accommodationRequired && accommodationScheme) {
-    accommodation =
-      accommodationScheme === '2nights' ? ACCOMMODATION_2_NIGHTS : ACCOMMODATION_3_NIGHTS;
-  }
+  const accommodation = accommodationRequired ? ACCOMMODATION_FEE : 0;
 
   return { base, accommodation, total: base + accommodation };
 }
@@ -23,8 +16,7 @@ export function calcIndividualTotal(
 export function calcDelegationTotal(
   numberOfDelegates: string,
   accommodationRequired: boolean,
-  accommodationDelegates: string,
-  accommodationScheme: '2nights' | '3nights' | ''
+  accommodationDelegates: string
 ): {
   perHead: number;
   registrationTotal: number;
@@ -40,10 +32,8 @@ export function calcDelegationTotal(
 
   let accommodationTotal = 0;
   const accDelegates = parseInt(accommodationDelegates) || 0;
-  if (accommodationRequired && accommodationScheme && accDelegates > 0) {
-    const perHeadAcc =
-      accommodationScheme === '2nights' ? ACCOMMODATION_2_NIGHTS : ACCOMMODATION_3_NIGHTS;
-    accommodationTotal = perHeadAcc * accDelegates;
+  if (accommodationRequired && accDelegates > 0) {
+    accommodationTotal = ACCOMMODATION_FEE * accDelegates;
   }
 
   const tierLabel = tier

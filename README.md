@@ -123,17 +123,16 @@ Participants choose between two channels, both requiring off-site transaction ID
 - **Individual Form**:
   - Requires standard contact information (Name, Age, Email, Phone, Institution, City).
   - Captures up to 3 choices for preferred Committees and Portfolios.
-  - Dynamically calculates accommodation charges based on the selected scheme (e.g., 2 nights vs. 3 nights).
+  - Adds an optional flat accommodation charge of ₹500 per head (3 days / 2 nights).
   - Stores payment logs and redirects to external payment portals.
   - Saves new institution names in the `College` database table dynamically for future autocompletion options.
 - **Delegation Form**:
   - Tailored for large institutional teams led by a single Head Delegate.
   - Pricing is calculated through tier volume pricing (defined in `src/data/pricing.ts`):
-    - **12–14 delegates**: ₹1,650 per head
-    - **15–19 delegates**: ₹1,600 per head
-    - **20–24 delegates**: ₹1,500 per head
-    - **25+ delegates**: ₹1,400 per head
-  - Multiplies the tier price by the delegate count and adds dynamic accommodation charges.
+    - **10–14 delegates**: ₹1,600 per head
+    - **15–19 delegates**: ₹1,500 per head
+    - **20+ delegates**: ₹1,400 per head
+  - Multiplies the tier price by the delegate count and adds the optional flat accommodation charge (₹500 per head).
 
 ### 3. Admin Dashboard Flow
 Once authorized, the admin accesses three main views:

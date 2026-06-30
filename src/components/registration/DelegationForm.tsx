@@ -4,8 +4,8 @@ import { CheckCircle, AlertCircle, CreditCard, Users, UserCheck, School, Chevron
 import StepIndicator from '../ui/StepIndicator';
 import Button from '../ui/Button';
 import {
-  PAYMENT_URL, DELEGATION_TIERS,
-  ACCOMMODATION_2_NIGHTS, ACCOMMODATION_3_NIGHTS
+  PAYMENT_URL,
+  ACCOMMODATION_FEE, ACCOMMODATION_LABEL
 } from '../../data/pricing';
 import { calcDelegationTotal } from '../../utils/pricing';
 import api from '../../utils/api';
@@ -48,7 +48,7 @@ const DelegationForm: React.FC = () => {
   const set = (field: keyof DelegationFormData, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const pricing = calcDelegationTotal(form.numberOfDelegates, form.accommodationRequired, form.accommodationDelegates, form.accommodationScheme as '2nights' | '3nights' | '');
+  const pricing = calcDelegationTotal(form.numberOfDelegates, form.accommodationRequired, form.accommodationDelegates);
 
   const validateStep = (): boolean => {
     const errs: typeof errors = {};
@@ -68,12 +68,9 @@ const DelegationForm: React.FC = () => {
     }
 
     if (step === 1) {
-      if (!form.numberOfDelegates) errs.numberOfDelegates = 'Please select delegate count.';
-    }
-
-    if (step === 2) {
-      if (form.accommodationRequired && !form.accommodationScheme)
-        errs.accommodationScheme = 'Please select an accommodation scheme.';
+      const count = parseInt(form.numberOfDelegates);
+      if (!form.numberOfDelegates) errs.numberOfDelegates = 'Please enter the number of delegates.';
+      else if (isNaN(count) || count < 10) errs.numberOfDelegates = 'Minimum delegation size is 10 delegates.';
     }
 
     setErrors(errs);
@@ -110,13 +107,6 @@ const DelegationForm: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
-  const delegateOptions = [
-    { value: '12', label: '12 Delegates' },
-    { value: '15', label: '15 Delegates' },
-    { value: '20', label: '20 Delegates' },
-    { value: '25', label: '25+ Delegates' },
-  ];
 
   if (step === 4) {
     return (
@@ -196,14 +186,12 @@ const DelegationForm: React.FC = () => {
             className="glass-card p-8">
             <h2 className="font-serif text-2xl text-white mb-6 flex items-center gap-2"><UserCheck size={22} className="text-gold" /> Delegation Size</h2>
             <div className="mb-6">
-              <label className={labelCls}>Number of Delegates *</label>
-              <select className={`${inputCls} ${errors.numberOfDelegates ? 'border-danger' : ''}`} value={form.numberOfDelegates} onChange={(e) => set('numberOfDelegates', e.target.value)}>
-                <option value="">Select delegate count</option>
-                {delegateOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-              </select>
+              <label className={labelCls}>Number of Delegates * <span className="text-gold text-xs">(minimum 10)</span></label>
+              <input type="number" min="10" className={`${inputCls} ${errors.numberOfDelegates ? 'border-danger' : ''}`} placeholder="e.g. 17" value={form.numberOfDelegates} onChange={(e) => set('numberOfDelegates', e.target.value)} />
               <FieldError msg={errors.numberOfDelegates} />
+              <p className="text-muted text-xs mt-2">Tiered pricing: 10–14 = ₹1,600 · 15–19 = ₹1,500 · 20+ = ₹1,400 per head.</p>
             </div>
-            {form.numberOfDelegates && (
+            {form.numberOfDelegates && parseInt(form.numberOfDelegates) >= 10 && (
               <div className="bg-navy/60 rounded-xl border border-gold/20 p-5">
                 <p className="text-gold text-xs uppercase tracking-widest font-sans mb-3">Live Pricing</p>
                 <div className="flex justify-between text-muted text-sm mb-2">
@@ -225,25 +213,20 @@ const DelegationForm: React.FC = () => {
             <h2 className="font-serif text-2xl text-white mb-6 flex items-center gap-2"><School size={22} className="text-gold" /> Accommodation</h2>
             <label className="flex items-center gap-3 cursor-pointer mb-6">
               <input type="checkbox" className="w-5 h-5 accent-yellow-500" checked={form.accommodationRequired}
-                onChange={(e) => { set('accommodationRequired', e.target.checked); if (!e.target.checked) { set('accommodationDelegates', ''); set('accommodationScheme', ''); } }} />
+                onChange={(e) => { set('accommodationRequired', e.target.checked); set('accommodationScheme', e.target.checked ? ACCOMMODATION_LABEL : ''); if (!e.target.checked) set('accommodationDelegates', ''); }} />
               <span className="text-white">Delegation requires accommodation</span>
             </label>
             {form.accommodationRequired && (
               <div className="space-y-4 ml-8">
+                <div className="bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">
+                  <span className="text-white">{ACCOMMODATION_LABEL}</span>
+                  <span className="text-gold font-semibold">+₹{ACCOMMODATION_FEE.toLocaleString()}/head</span>
+                </div>
                 <div>
                   <label className={labelCls}>Number of delegates needing accommodation</label>
                   <input type="number" className={inputCls} placeholder="e.g. 8" value={form.accommodationDelegates} onChange={(e) => set('accommodationDelegates', e.target.value)} min="1" />
                 </div>
-                <div className="space-y-3">
-                  {([['2nights', `2 Nights / 3 Days (+₹${ACCOMMODATION_2_NIGHTS}/head)`], ['3nights', `3 Nights / 3 Days (+₹${ACCOMMODATION_3_NIGHTS}/head)`]] as const).map(([val, lbl]) => (
-                    <label key={val} className="flex items-center gap-3 cursor-pointer">
-                      <input type="radio" name="delAccScheme" className="accent-yellow-500" value={val} checked={form.accommodationScheme === val} onChange={() => set('accommodationScheme', val)} />
-                      <span className="text-white">{lbl}</span>
-                    </label>
-                  ))}
-                  <FieldError msg={errors.accommodationScheme} />
-                </div>
-                {form.accommodationDelegates && form.accommodationScheme && (
+                {form.accommodationDelegates && (
                   <div className="bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm">
                     <div className="flex justify-between text-muted mb-1">
                       <span>Accommodation subtotal</span>
@@ -267,7 +250,7 @@ const DelegationForm: React.FC = () => {
               </div>
               {form.accommodationRequired && pricing.accommodationTotal > 0 && (
                 <div className="flex justify-between text-muted text-sm py-2">
-                  <span>Accommodation ({form.accommodationDelegates} × ₹{form.accommodationScheme === '2nights' ? ACCOMMODATION_2_NIGHTS : ACCOMMODATION_3_NIGHTS})</span>
+                  <span>Accommodation ({form.accommodationDelegates} × ₹{ACCOMMODATION_FEE})</span>
                   <span>₹{pricing.accommodationTotal.toLocaleString()}</span>
                 </div>
               )}

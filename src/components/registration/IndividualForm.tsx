@@ -5,7 +5,7 @@ import StepIndicator from '../ui/StepIndicator';
 import Button from '../ui/Button';
 import {
   PAYMENT_URL, MATRIX_URL, INDIAN_POLITICIANS, INTERNATIONAL_PORTFOLIOS,
-  INDIVIDUAL_BASE_FEE, ACCOMMODATION_2_NIGHTS, ACCOMMODATION_3_NIGHTS
+  INDIVIDUAL_BASE_FEE, ACCOMMODATION_FEE, ACCOMMODATION_LABEL
 } from '../../data/pricing';
 import { committees } from '../../data/committees';
 import { calcIndividualTotal } from '../../utils/pricing';
@@ -57,7 +57,7 @@ const IndividualForm: React.FC = () => {
   const set = (field: keyof IndividualFormData, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const pricing = calcIndividualTotal(form.accommodationRequired, form.accommodationScheme as '2nights' | '3nights' | '');
+  const pricing = calcIndividualTotal(form.accommodationRequired);
 
   const validateStep = (): boolean => {
     const errs: typeof errors = {};
@@ -82,12 +82,6 @@ const IndividualForm: React.FC = () => {
     if (step === 1) {
       if (!form.committeePreference1) errs.committees = 'At least 1 committee preference is required.';
       if (form.committeePreference1 && !form.portfolioPreference1) errs.portfolios = 'Please select a portfolio for your 1st preference.';
-    }
-
-    if (step === 2) {
-      if (form.accommodationRequired && !form.accommodationScheme) {
-        errs.accommodationScheme = 'Please select an accommodation scheme.';
-      }
     }
 
     setErrors(errs);
@@ -215,21 +209,15 @@ const IndividualForm: React.FC = () => {
             className="glass-card p-8"
           >
             <h2 className="font-serif text-2xl text-white mb-6 flex items-center gap-2"><School size={22} className="text-gold" /> Accommodation</h2>
-            <label className="flex items-center gap-3 cursor-pointer mb-6">
+            <label className="flex items-center gap-3 cursor-pointer mb-4">
               <input type="checkbox" className="w-5 h-5 accent-yellow-500" checked={form.accommodationRequired}
-                onChange={(e) => { set('accommodationRequired', e.target.checked); if (!e.target.checked) set('accommodationScheme', ''); }} />
+                onChange={(e) => { set('accommodationRequired', e.target.checked); set('accommodationScheme', e.target.checked ? ACCOMMODATION_LABEL : ''); }} />
               <span className="text-white">I require accommodation</span>
             </label>
             {form.accommodationRequired && (
-              <div className="ml-8 space-y-3">
-                {([['2nights', `2 Nights / 3 Days (+₹${ACCOMMODATION_2_NIGHTS})`], ['3nights', `3 Nights / 3 Days (+₹${ACCOMMODATION_3_NIGHTS})`]] as const).map(([val, lbl]) => (
-                  <label key={val} className="flex items-center gap-3 cursor-pointer">
-                    <input type="radio" name="accScheme" className="accent-yellow-500" value={val}
-                      checked={form.accommodationScheme === val} onChange={() => set('accommodationScheme', val)} />
-                    <span className="text-white">{lbl}</span>
-                  </label>
-                ))}
-                <FieldError msg={errors.accommodationScheme} />
+              <div className="ml-8 bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">
+                <span className="text-white">{ACCOMMODATION_LABEL}</span>
+                <span className="text-gold font-semibold">+₹{ACCOMMODATION_FEE.toLocaleString()}</span>
               </div>
             )}
           </motion.div>
@@ -245,9 +233,9 @@ const IndividualForm: React.FC = () => {
               <div className="flex justify-between text-muted text-sm py-2">
                 <span>Delegate Registration Fee</span><span>₹{INDIVIDUAL_BASE_FEE.toLocaleString()}</span>
               </div>
-              {form.accommodationRequired && form.accommodationScheme && (
+              {form.accommodationRequired && (
                 <div className="flex justify-between text-muted text-sm py-2">
-                  <span>Accommodation ({form.accommodationScheme === '2nights' ? '2 nights' : '3 nights'})</span>
+                  <span>Accommodation ({ACCOMMODATION_LABEL})</span>
                   <span>₹{pricing.accommodation.toLocaleString()}</span>
                 </div>
               )}

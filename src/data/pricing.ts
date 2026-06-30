@@ -1,14 +1,15 @@
 // ALL prices come from here — never hardcode ₹ amounts in JSX
 
 export const INDIVIDUAL_BASE_FEE = 1700;
-export const ACCOMMODATION_2_NIGHTS = 800;
-export const ACCOMMODATION_3_NIGHTS = 1000;
+
+// Accommodation — single flat rate, 3 days / 2 nights
+export const ACCOMMODATION_FEE = 500; // per head
+export const ACCOMMODATION_LABEL = '3 Days / 2 Nights';
 
 export const DELEGATION_TIERS = [
-  { min: 12, max: 14, perHead: 1650 },
-  { min: 15, max: 19, perHead: 1600 },
-  { min: 20, max: 24, perHead: 1500 },
-  { min: 25, max: Infinity, perHead: 1400 },
+  { min: 10, max: 14, perHead: 1600 },
+  { min: 15, max: 19, perHead: 1500 },
+  { min: 20, max: Infinity, perHead: 1400 },
 ];
 
 // ── Conference Theme ───────────────────────────────────────────────────────────

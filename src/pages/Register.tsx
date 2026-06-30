@@ -6,19 +6,7 @@ import PageHero from '../components/ui/PageHero';
 import StepIndicator from '../components/ui/StepIndicator';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
-import {
-  INDIVIDUAL_BASE_FEE,
-  ACCOMMODATION_2_NIGHTS,
-  ACCOMMODATION_3_NIGHTS,
-  PAYMENT_URL,
-  MATRIX_URL,
-  INDIAN_POLITICIANS,
-  INTERNATIONAL_PORTFOLIOS,
-} from '../data/pricing';
-import { committees } from '../data/committees';
-import { calcIndividualTotal, calcDelegationTotal } from '../utils/pricing';
-import api from '../utils/api';
-import { IndividualFormData, DelegationFormData } from '../types';
+import { MATRIX_URL } from '../data/pricing';
 import IndividualForm from '../components/registration/IndividualForm';
 import DelegationForm from '../components/registration/DelegationForm';
 
