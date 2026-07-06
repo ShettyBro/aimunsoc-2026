@@ -119,7 +119,7 @@ Home   About   Board  Gallery                      │
 6. **Contact**: Form to submit queries directly. Integrates validation and records submissions in the database under `ContactMessage`.
 
 ### 2. Registration Flow & Form Logic
-Participants choose between two channels, both requiring off-site transaction IDs for validation:
+Participants choose between two channels, both requiring off-site transaction IDs for validation. A **complimentary shuttle service** runs to and from the nearby metro station for all attendees.
 - **Individual Form**:
   - Requires standard contact information (Name, Age, Email, Phone, Institution, City).
   - Captures up to 3 choices for preferred Committees and Portfolios.

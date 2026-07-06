@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, AlertCircle, CreditCard, Users, UserCheck, School, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CheckCircle, AlertCircle, CreditCard, Users, UserCheck, School, ChevronLeft, ChevronRight, Bus } from 'lucide-react';
 import StepIndicator from '../ui/StepIndicator';
 import Button from '../ui/Button';
 import {
   PAYMENT_URL,
-  ACCOMMODATION_FEE, ACCOMMODATION_LABEL
+  ACCOMMODATION_FEE, ACCOMMODATION_LABEL, SHUTTLE_NOTE
 } from '../../data/pricing';
 import { calcDelegationTotal } from '../../utils/pricing';
 import api from '../../utils/api';
@@ -216,6 +216,7 @@ const DelegationForm: React.FC = () => {
                 onChange={(e) => { set('accommodationRequired', e.target.checked); set('accommodationScheme', e.target.checked ? ACCOMMODATION_LABEL : ''); if (!e.target.checked) set('accommodationDelegates', ''); }} />
               <span className="text-white">Delegation requires accommodation</span>
             </label>
+            <p className="text-muted text-xs mb-6 flex items-start gap-2"><Bus size={14} className="text-gold shrink-0 mt-0.5" /> {SHUTTLE_NOTE}</p>
             {form.accommodationRequired && (
               <div className="space-y-4 ml-8">
                 <div className="bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">

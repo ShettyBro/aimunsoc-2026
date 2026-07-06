@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, AlertCircle, CreditCard, User, Users, School, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { CheckCircle, AlertCircle, CreditCard, User, Users, School, ChevronLeft, ChevronRight, ExternalLink, Bus } from 'lucide-react';
 import StepIndicator from '../ui/StepIndicator';
 import Button from '../ui/Button';
 import {
   PAYMENT_URL, MATRIX_URL, INDIAN_POLITICIANS, INTERNATIONAL_PORTFOLIOS,
-  INDIVIDUAL_BASE_FEE, ACCOMMODATION_FEE, ACCOMMODATION_LABEL
+  INDIVIDUAL_BASE_FEE, ACCOMMODATION_FEE, ACCOMMODATION_LABEL, SHUTTLE_NOTE
 } from '../../data/pricing';
 import { committees } from '../../data/committees';
 import { calcIndividualTotal } from '../../utils/pricing';
@@ -214,6 +214,7 @@ const IndividualForm: React.FC = () => {
                 onChange={(e) => { set('accommodationRequired', e.target.checked); set('accommodationScheme', e.target.checked ? ACCOMMODATION_LABEL : ''); }} />
               <span className="text-white">I require accommodation</span>
             </label>
+            <p className="text-muted text-xs mb-4 flex items-start gap-2"><Bus size={14} className="text-gold shrink-0 mt-0.5" /> {SHUTTLE_NOTE}</p>
             {form.accommodationRequired && (
               <div className="ml-8 bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">
                 <span className="text-white">{ACCOMMODATION_LABEL}</span>

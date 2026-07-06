@@ -6,6 +6,10 @@ export const INDIVIDUAL_BASE_FEE = 1700;
 export const ACCOMMODATION_FEE = 500; // per head
 export const ACCOMMODATION_LABEL = '3 Days / 2 Nights';
 
+// Complimentary shuttle — free, informational only (no charge)
+export const SHUTTLE_NOTE =
+  'Complimentary shuttle service is provided to and from the nearby metro station.';
+
 export const DELEGATION_TIERS = [
   { min: 10, max: 14, perHead: 1600 },
   { min: 15, max: 19, perHead: 1500 },

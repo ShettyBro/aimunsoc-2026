@@ -2,16 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, Award, ExternalLink, Trophy, Clock } from 'lucide-react';
+import { Calendar, MapPin, Users, Award, ExternalLink, Trophy, Clock, Bus } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import SectionDivider from '../components/ui/SectionDivider';
 import Card from '../components/ui/Card';
-import { PRIZES } from '../data/pricing';
+import { PRIZES, SHUTTLE_NOTE } from '../data/pricing';
 
 const details = [
   { icon: Calendar, title: 'Conference Dates', content: '28th, 29th & 30th August 2026' },
   { icon: MapPin, title: 'Venue', content: 'Acharya Institute of Technology, Soldevanahalli, Bengaluru' },
   { icon: Users, title: 'Expected Delegates', content: '300+ delegates from colleges across South India' },
+  { icon: Bus, title: 'Getting There', content: SHUTTLE_NOTE },
   {
     icon: Award, title: 'Theme', content: '"Diplomacy through Cooperation"',
     link: { href: "/docs/Aicon'26 Invitational Brochure-C.pdf", label: 'View Brochure (PDF)' },
