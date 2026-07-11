@@ -41,6 +41,9 @@ export const CONFERENCE_DATE = _rawDate
 
 export const PAYMENT_URL = import.meta.env.VITE_PAYMENT_URL as string || 'https://www.acharyaerptech.in/ExternalPayment/179';
 
+// Set VITE_REGISTRATION_OPEN=true in .env / Vercel dashboard to open registrations
+export const REGISTRATION_OPEN = import.meta.env.VITE_REGISTRATION_OPEN === 'true';
+
 export const MATRIX_URL =
   'https://docs.google.com/spreadsheets/d/1jWckulVKgORE0hABxVkxRBv_Z1mvk3q0u8Ad6DZH4dM/view?usp=sharing';
 

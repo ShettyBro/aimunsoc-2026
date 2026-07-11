@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, XCircle } from 'lucide-react';
 import CountdownTimer from '../ui/CountdownTimer';
+import { REGISTRATION_OPEN } from '../../data/pricing';
 
 // Floating particle
 const Particle: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
@@ -52,6 +53,17 @@ const particles = Array.from({ length: 20 }, (_, i) => ({
 
 const HeroSection: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const [showClosed, setShowClosed] = useState(false);
+
+  const handleRegisterClick = () => {
+    if (!REGISTRATION_OPEN) {
+      setShowClosed(true);
+      setTimeout(() => setShowClosed(false), 4000);
+      return;
+    }
+    navigate('/register');
+  };
 
   return (
     <section
@@ -120,12 +132,12 @@ const HeroSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link
-            to="/register"
+          <button
+            onClick={handleRegisterClick}
             className="bg-gold text-navy font-semibold px-8 py-4 rounded-md hover:bg-gold-light transition-all duration-200 text-lg"
           >
             Register Now
-          </Link>
+          </button>
           <Link
             to="/about"
             className="border border-gold text-gold px-8 py-4 rounded-md hover:bg-gold/10 transition-all duration-200 text-lg"
@@ -133,6 +145,18 @@ const HeroSection: React.FC = () => {
             Learn More
           </Link>
         </motion.div>
+
+        {/* Closed notification */}
+        {showClosed && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            className="mt-4 inline-flex items-center gap-2 bg-red-900/40 border border-red-500/40 text-red-300 text-sm px-5 py-2.5 rounded-full"
+          >
+            <XCircle size={15} /> Registrations are currently closed. Check back soon.
+          </motion.div>
+        )}
       </div>
 
       {/* Scroll indicator */}
