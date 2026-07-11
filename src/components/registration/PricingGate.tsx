@@ -18,17 +18,17 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
     >
-      <div className="text-center mb-10">
-        <p className="text-gold text-xs uppercase tracking-[0.25em] font-sans mb-3">Registration Fees</p>
-        <h2 className="font-serif text-4xl text-white mb-3">Pricing Details</h2>
+      <div className="text-center mb-6">
+        <p className="text-gold text-xs uppercase tracking-[0.25em] font-sans mb-2">Registration Fees</p>
+        <h2 className="font-serif text-3xl md:text-4xl text-white mb-2">Pricing Details</h2>
         <p className="text-muted text-sm max-w-md mx-auto">
           Review the fee structure below before proceeding to the registration form.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
+      <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-6">
         {/* Individual */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -57,7 +57,7 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
               <div className="flex justify-between items-center py-2.5 border-b border-navy-mid/60">
                 <span className="text-muted text-sm flex items-center gap-2">
                   <Bed size={13} className="text-gold/60" /> Accommodation
-                  <span className="text-gold/60 text-xs">({ACCOMMODATION_LABEL})</span>
+                  <span className="text-gold/60 text-xs">(optional, {ACCOMMODATION_LABEL})</span>
                 </span>
                 <span className="text-white font-semibold">+&#8377;{ACCOMMODATION_FEE.toLocaleString()}</span>
               </div>
@@ -84,7 +84,7 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
               </div>
               <div>
                 <p className="text-gold text-xs uppercase tracking-widest font-sans">Delegation</p>
-                <h3 className="font-serif text-xl text-white">Group (Min. 10)</h3>
+                <h3 className="font-serif text-xl text-white">Institutional (Min. 10)</h3>
               </div>
             </div>
             <p className="text-muted text-xs uppercase tracking-widest font-sans mb-3">Per Head Rate</p>
@@ -127,7 +127,7 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.25 }}
-        className="bg-gold/5 border border-gold/20 rounded-xl px-5 py-4 mb-8 text-sm text-muted"
+        className="bg-gold/5 border border-gold/20 rounded-xl px-5 py-3 mb-6 text-sm text-muted"
       >
         <span className="text-gold font-semibold">Note: </span>
         Accommodation charges are optional and cover {ACCOMMODATION_LABEL}. A complimentary shuttle
