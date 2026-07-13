@@ -109,9 +109,6 @@ const About: React.FC = () => {
                   {d.link && (
                     <a
                       href={d.link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      {...(d.link.download ? { download: true } : {})}
                       className="inline-flex items-center gap-1 text-gold text-sm hover:text-gold-light mt-2"
                     >
                       {d.link.label}
