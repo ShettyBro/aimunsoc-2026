@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
+import { BROCHURE_URL } from '../../data/pricing';
 
 // ── "Register" removed — CTA button is the only registration entry point ──
 const navLinks = [
@@ -75,6 +76,18 @@ const Navbar: React.FC = () => {
 
             {/* Right side: CTA + hamburger */}
             <div className="flex items-center gap-3">
+            {/* Brochure download */}
+              <a
+                href={BROCHURE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="hidden sm:inline-flex items-center gap-1.5 border border-gold/50 text-gold font-semibold px-4 py-2 rounded-md hover:bg-gold/10 transition-all duration-200 text-sm whitespace-nowrap"
+              >
+                <Download size={14} /> Brochure
+              </a>
+
+              {/* Register Now */}
               <button
                 onClick={() => navigate('/register')}
                 className="hidden sm:inline-flex items-center bg-gold text-navy font-semibold px-4 py-2 rounded-md hover:bg-gold-light transition-all duration-200 text-sm whitespace-nowrap"
@@ -164,6 +177,15 @@ const Navbar: React.FC = () => {
 
               {/* Bottom CTA */}
               <div className="p-6 border-t border-gold/20 shrink-0">
+                <a
+                  href={BROCHURE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="w-full mb-3 inline-flex items-center justify-center gap-2 border border-gold/50 text-gold font-semibold py-3 rounded-md hover:bg-gold/10 transition-all text-base"
+                >
+                  <Download size={16} /> Download Brochure
+                </a>
                 <button
                   onClick={() => { navigate('/register'); setIsMenuOpen(false); }}
                   className="w-full bg-gold text-navy font-semibold py-3 rounded-md hover:bg-gold-light transition-all text-base"
