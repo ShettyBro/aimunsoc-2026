@@ -47,6 +47,13 @@ export const REGISTRATION_OPEN = import.meta.env.VITE_REGISTRATION_OPEN === 'tru
 export const MATRIX_URL =
   'https://docs.google.com/spreadsheets/d/1jWckulVKgORE0hABxVkxRBv_Z1mvk3q0u8Ad6DZH4dM/view?usp=sharing';
 
+// Cloudflare R2 brochure download URL
+const _r2Base = (import.meta.env.VITE_R2_PUBLIC_BASE_URL as string || '').replace(/\/$/, '');
+const _brochureFile = import.meta.env.VITE_BROCHURE_FILENAME as string || "Aicon'26 Brochure Digital File-Compressed.pdf";
+export const BROCHURE_URL = _r2Base
+  ? `${_r2Base}/${encodeURIComponent(_brochureFile)}`
+  : `/docs/Aicon'26 Invitational Brochure-C.pdf`; // local fallback
+
 export const INDIAN_POLITICIANS = [
   'Narendra Modi', 'Rahul Gandhi', 'Amit Shah', 'Arvind Kejriwal',
   'Yogi Adityanath', 'Mallikarjun Kharge', 'Shashi Tharoor', 'Piyush Goyal',

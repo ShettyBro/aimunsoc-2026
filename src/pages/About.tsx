@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, Award, ExternalLink, Trophy, Clock, Bus } from 'lucide-react';
+import { Calendar, MapPin, Users, Award, ExternalLink, Download, Trophy, Clock, Bus } from 'lucide-react';
 import PageHero from '../components/ui/PageHero';
 import SectionDivider from '../components/ui/SectionDivider';
 import Card from '../components/ui/Card';
-import { PRIZES, SHUTTLE_NOTE } from '../data/pricing';
+import { PRIZES, SHUTTLE_NOTE, BROCHURE_URL } from '../data/pricing';
 
 const details = [
   { icon: Calendar, title: 'Conference Dates', content: '28th, 29th & 30th August 2026' },
@@ -15,7 +15,7 @@ const details = [
   { icon: Bus, title: 'Getting There', content: SHUTTLE_NOTE },
   {
     icon: Award, title: 'Theme', content: '"Diplomacy through Cooperation"',
-    link: { href: "/docs/Aicon'26 Invitational Brochure-C.pdf", label: 'View Brochure (PDF)' },
+    link: { href: BROCHURE_URL, label: 'Download Brochure (PDF)', download: true },
   },
 ];
 
@@ -107,8 +107,17 @@ const About: React.FC = () => {
                   <h3 className="font-serif text-lg text-white mb-1">{d.title}</h3>
                   <p className="text-muted text-sm">{d.content}</p>
                   {d.link && (
-                    <a href={d.link.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-gold text-sm hover:text-gold-light mt-2">
-                      {d.link.label} <ExternalLink size={12} />
+                    <a
+                      href={d.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      {...(d.link.download ? { download: true } : {})}
+                      className="inline-flex items-center gap-1 text-gold text-sm hover:text-gold-light mt-2"
+                    >
+                      {d.link.label}
+                      {d.link.download
+                        ? <Download size={12} />
+                        : <ExternalLink size={12} />}
                     </a>
                   )}
                 </div>
