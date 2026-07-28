@@ -25,9 +25,9 @@ export const currentBoard: BoardMember[] = [
   { name: 'Angelica Daniel', position: "Chargé d'Affaires", image: '/TheBoard/Angelica Hazel Daniel.jpeg' },
   { name: 'Yadriksha Uprety', position: 'Treasurer', image: '/TheBoard/Yadriksha Uprety.jpeg' },
   { name: 'Adithya P Kumar', position: 'Editor In-Chief', image: '/TheBoard/Adithya P Kumar.jpeg' },
-  { name: 'Vaibhav Vaswani', position: 'Editor In-Chief', image: '/TheBoard/placeholder.jpg' },
+  { name: 'Vaibhav Vaswani', position: 'Editor In-Chief', image: '/TheBoard/vaibhav.jpeg' },
   { name: 'Syed Armaan', position: 'Deputy Secretary', image: '/TheBoard/Syed Armaan.jpeg' },
-  { name: 'Yuvraj Singh', position: 'Deputy Secretary', image: '/TheBoard/placeholder.jpg' },
+  { name: 'Yuvraj Singh', position: 'Deputy Secretary', image: '/TheBoard/yuvraj.jpeg' },
   { name: 'Amarthya G Thamappa', position: 'Deputy Secretary', image: '/TheBoard/placeholder.jpg' },
 ];
 
