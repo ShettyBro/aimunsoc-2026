@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { usePageTitle } from '../hooks/usePageTitle';
 import HeroSection from '../components/home/HeroSection';
 import StatsBar from '../components/home/StatsBar';
+import ChiefGuestsSection from '../components/home/ChiefGuestsSection';
 import FeaturesSection from '../components/home/FeaturesSection';
 import QuickLinks from '../components/home/QuickLinks';
 import SectionDivider from '../components/ui/SectionDivider';
@@ -124,6 +125,7 @@ const Home: React.FC = () => {
     <div>
       <HeroSection />
       <StatsBar />
+      <ChiefGuestsSection />
       <FeaturesSection />
 
       <SectionDivider label="Past Highlights" />

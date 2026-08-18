@@ -221,7 +221,7 @@ const DelegationForm: React.FC = () => {
               <div className="space-y-4 ml-8">
                 <div className="bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">
                   <span className="text-white">{ACCOMMODATION_LABEL}</span>
-                  <span className="text-gold font-semibold">+₹{ACCOMMODATION_FEE.toLocaleString()}/head</span>
+                  <span className="text-gold font-semibold">Contact Bhuvin: 6385599477</span>
                 </div>
                 <div>
                   <label className={labelCls}>Number of delegates needing accommodation</label>
@@ -251,8 +251,8 @@ const DelegationForm: React.FC = () => {
               </div>
               {form.accommodationRequired && pricing.accommodationTotal > 0 && (
                 <div className="flex justify-between text-muted text-sm py-2">
-                  <span>Accommodation ({form.accommodationDelegates} × ₹{ACCOMMODATION_FEE})</span>
-                  <span>₹{pricing.accommodationTotal.toLocaleString()}</span>
+                  <span>Accommodation ({form.accommodationDelegates} delegates)</span>
+                  <span className="text-gold">Contact Bhuvin: 6385599477</span>
                 </div>
               )}
               <div className="border-t border-gold/20 mt-2 pt-4 flex justify-between items-center">

@@ -218,7 +218,7 @@ const IndividualForm: React.FC = () => {
             {form.accommodationRequired && (
               <div className="ml-8 bg-navy/60 rounded-lg p-4 border border-gold/20 text-sm flex justify-between">
                 <span className="text-white">{ACCOMMODATION_LABEL}</span>
-                <span className="text-gold font-semibold">+₹{ACCOMMODATION_FEE.toLocaleString()}</span>
+                <span className="text-gold font-semibold">Contact Bhuvin: 6385599477</span>
               </div>
             )}
           </motion.div>
@@ -237,7 +237,7 @@ const IndividualForm: React.FC = () => {
               {form.accommodationRequired && (
                 <div className="flex justify-between text-muted text-sm py-2">
                   <span>Accommodation ({ACCOMMODATION_LABEL})</span>
-                  <span>₹{pricing.accommodation.toLocaleString()}</span>
+                  <span className="text-gold">Contact Bhuvin: 6385599477</span>
                 </div>
               )}
               <div className="border-t border-gold/20 mt-2 pt-4 flex justify-between items-center">

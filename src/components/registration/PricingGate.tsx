@@ -59,7 +59,7 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
                   <Bed size={13} className="text-gold/60" /> Accommodation
                   <span className="text-gold/60 text-xs">(optional, {ACCOMMODATION_LABEL})</span>
                 </span>
-                <span className="text-white font-semibold">+&#8377;{ACCOMMODATION_FEE.toLocaleString()}</span>
+                <span className="text-gold font-semibold text-xs">Contact Bhuvin: 6385599477</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <span className="text-muted text-sm">Total (no accommodation)</span>
@@ -116,7 +116,7 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
               <span className="text-muted text-sm flex items-center gap-2">
                 <Bed size={13} className="text-gold/60" /> Accommodation (optional)
               </span>
-              <span className="text-white font-semibold">+&#8377;{ACCOMMODATION_FEE.toLocaleString()}/head</span>
+              <span className="text-gold font-semibold text-xs">Contact Bhuvin: 6385599477</span>
             </div>
           </div>
         </motion.div>
@@ -130,7 +130,8 @@ const PricingGate: React.FC<PricingGateProps> = ({ onProceed }) => {
         className="bg-gold/5 border border-gold/20 rounded-xl px-5 py-3 mb-6 text-sm text-muted"
       >
         <span className="text-gold font-semibold">Note: </span>
-        Accommodation charges are optional and cover {ACCOMMODATION_LABEL}. A complimentary shuttle
+        Accommodation charges are optional and cover {ACCOMMODATION_LABEL}. For accommodation pricing, contact{' '}
+        <span className="text-gold font-semibold">Bhuvin: 6385599477</span>. A complimentary shuttle
         service is available to and from the nearby metro station.
       </motion.div>
 
