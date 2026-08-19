@@ -41,6 +41,7 @@ export const chiefGuests: ChiefGuest[] = [
     subDesignation: 'PUM Netherlands',
     country: 'Netherlands',
     countryCode: 'NL',
+    photo: '/Hema Sanjay.jpeg',
     description:
       'Ms. Hema Sanjay serves as Country Manager for PUM Netherlands, facilitating enterprise development and knowledge transfer between the Netherlands and India.',
   },
@@ -65,6 +66,7 @@ export const chiefGuests: ChiefGuest[] = [
     subDesignation: 'Embassy of the Kingdom of Netherlands',
     country: 'Netherlands',
     countryCode: 'NL',
+    photo: '/Balaji Venkatraman.jpeg',
     description:
       'Mr. Balaji Venkataraman serves as Area Director for South India at the Embassy of the Kingdom of Netherlands, fostering diplomatic and economic ties between the Netherlands and India.',
   },
@@ -197,8 +199,12 @@ const GuestCard: React.FC<{ guest: ChiefGuest }> = ({ guest }) => {
             <img
               src={guest.photo}
               alt={guest.name}
-              className="w-full h-full object-cover object-top"
-              style={{ transform: hovered ? 'scale(1.08)' : 'scale(1.04)', transition: 'transform 0.6s ease' }}
+              className="w-full h-full object-cover"
+              style={{
+                objectPosition: 'center 15%',
+                transform: hovered ? 'scale(1.06)' : 'scale(1.02)',
+                transition: 'transform 0.6s ease',
+              }}
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-b from-[#1A3A5C] to-[#112240]">
