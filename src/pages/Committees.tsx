@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Crown, Users, X, ExternalLink } from 'lucide-react';
+import { Crown, Users, X, ExternalLink, Download } from 'lucide-react';
 import { usePageTitle } from '../hooks/usePageTitle';
 import PageHero from '../components/ui/PageHero';
 import { committees, Committee } from '../data/committees';
@@ -11,6 +11,13 @@ const typeBadge = (type: 'national' | 'international') =>
   type === 'national'
     ? 'bg-teal/20 text-teal border border-teal/30'
     : 'bg-gold/20 text-gold border border-gold/30';
+
+// Docs that actually exist in /public/docs
+const AVAILABLE_DOCS = new Set([
+  "/docs/AICON 26 IPC Background Guide.PDF",
+  "/docs/AIPPM BG-AICON'26.pdf",
+  "/docs/AiCon 2026- IP(Photojournalist)-BG final.pdf",
+]);
 
 interface CommitteeModalProps {
   committee: Committee;
@@ -109,10 +116,30 @@ const CommitteeModal: React.FC<CommitteeModalProps> = ({ committee, onClose }) =
             </div>
           )}
 
+          {/* Download Background Guide */}
+          <div className="mt-6 pt-5 border-t border-gold/15">
+            {AVAILABLE_DOCS.has(committee.backgroundGuide) ? (
+              <a
+                href={committee.backgroundGuide}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-gold text-navy font-semibold px-4 py-2.5 rounded-md hover:bg-gold-light transition-all text-sm"
+              >
+                <Download size={14} />
+                Download Background Guide
+              </a>
+            ) : (
+              <button
+                disabled
+                className="flex items-center justify-center gap-2 w-full border border-muted/20 text-muted/40 px-4 py-2.5 rounded-md text-sm cursor-not-allowed"
+              >
+                <Download size={14} />
+                Background Guide — Coming Soon
+              </button>
+            )}
+          </div>
 
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+
   );
 };
 
@@ -173,12 +200,34 @@ const Committees: React.FC = () => {
                 <p className="text-muted text-sm leading-relaxed flex-1 line-clamp-3 mb-5">
                   {committee.description}
                 </p>
-                <button
-                  onClick={() => setSelectedCommittee(committee)}
-                  className="border border-gold text-gold px-4 py-2 rounded-md hover:bg-gold/10 transition-all text-sm font-sans w-full"
-                >
-                  View Details
-                </button>
+                {/* Buttons row */}
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => setSelectedCommittee(committee)}
+                    className="border border-gold text-gold px-4 py-2 rounded-md hover:bg-gold/10 transition-all text-sm font-sans w-full"
+                  >
+                    View Details
+                  </button>
+                  {AVAILABLE_DOCS.has(committee.backgroundGuide) ? (
+                    <a
+                      href={committee.backgroundGuide}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 bg-gold/10 border border-gold/40 text-gold px-4 py-2 rounded-md hover:bg-gold/20 transition-all text-sm font-sans w-full"
+                    >
+                      <Download size={13} />
+                      Background Guide
+                    </a>
+                  ) : (
+                    <button
+                      disabled
+                      className="flex items-center justify-center gap-2 border border-muted/15 text-muted/35 px-4 py-2 rounded-md text-sm font-sans w-full cursor-not-allowed"
+                    >
+                      <Download size={13} />
+                      BG Coming Soon
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
