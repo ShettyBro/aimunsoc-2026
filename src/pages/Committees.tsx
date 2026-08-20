@@ -139,7 +139,9 @@ const CommitteeModal: React.FC<CommitteeModalProps> = ({ committee, onClose }) =
             )}
           </div>
 
-
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
