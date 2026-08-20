@@ -129,7 +129,7 @@ export const committees: Committee[] = [
     fullName: 'All India Political Parties Meet',
     type: 'national',
     image: '/CommitteeLogos/5.png',
-    backgroundGuide: '/docs/AIPPM.pdf',
+    backgroundGuide: "/docs/AIPPM BG-AICON'26.pdf",
     venue: 'Mechanical Auditorium',
     chairs: [
       { name: 'Yashwanth Gowda', role: 'Chairperson' },
@@ -146,7 +146,7 @@ export const committees: Committee[] = [
     fullName: 'International Press Corps',
     type: 'international',
     image: '/CommitteeLogos/6.png',
-    backgroundGuide: '/docs/IPC.pdf',
+    backgroundGuide: '/docs/AICON 26 IPC Background Guide.PDF',
     venue: 'MBA Boardroom',
     chairs: [
       { name: 'Siya Anand', role: 'Head of International Press' },
@@ -162,7 +162,7 @@ export const committees: Committee[] = [
     fullName: 'Photojournalism',
     type: 'international',
     image: '/CommitteeLogos/6.png',
-    backgroundGuide: '/docs/IPC.pdf',
+    backgroundGuide: '/docs/AiCon 2026- IP(Photojournalist)-BG final.pdf',
     venue: 'MBA Boardroom',
     chairs: [
       { name: 'Priyanshu Lahoti', role: 'Chairperson' },

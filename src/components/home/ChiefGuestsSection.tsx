@@ -29,6 +29,7 @@ export const chiefGuests: ChiefGuest[] = [
     subDesignation: 'Bengaluru South',
     country: 'India',
     countryCode: 'IN',
+    photo: '/Tejasvi Surya.jpeg',
     description:
       'Tejasvi Surya is the Member of Parliament from Bengaluru South, a dynamic young leader known for his advocacy for technology, youth empowerment, and national development.',
   },
@@ -54,6 +55,7 @@ export const chiefGuests: ChiefGuest[] = [
     subDesignation: 'Member of Parliament, Mysuru & Kodagu',
     country: 'India',
     countryCode: 'IN',
+    photo: '/Yaduveer Krishnadatta.jpeg',
     description:
       'His Royal Highness Yaduveer Krishnadatta Chamaraja Wadiyar is the reigning Maharaja of Mysuru and Member of Parliament for Mysuru & Kodagu, carrying forward the illustrious legacy of the Wadiyar royal dynasty.',
   },
