@@ -24,7 +24,7 @@ export const committees: Committee[] = [
     fullName: 'United Nations Security Council',
     type: 'international',
     image: '/CommitteeLogos/1.png',
-    backgroundGuide: '/docs/UNSC.pdf',
+    backgroundGuide: '/docs/AICON UNSC BG.pdf',
     venue: 'Library Seminar Hall',
     freezeDate: 'August 1948',
     chairs: [
@@ -42,7 +42,7 @@ export const committees: Committee[] = [
     fullName: 'Disarmament and International Security Committee',
     type: 'international',
     image: '/CommitteeLogos/2.png',
-    backgroundGuide: '/docs/DISEC.pdf',
+    backgroundGuide: '/docs/BACKGROUND GUIDE - AI CON 26 DISEC.pdf',
     venue: 'Library Conference Room',
     chairs: [
       { name: 'Anish G', role: 'Chairperson' },
@@ -76,7 +76,7 @@ export const committees: Committee[] = [
     fullName: 'United Nations Women',
     type: 'international',
     image: '/CommitteeLogos/4.png',
-    backgroundGuide: '/docs/UNW.pdf',
+    backgroundGuide: '/docs/UNW BG AICON 26.pdf',
     venue: 'AIGS Seminar Hall',
     chairs: [
       { name: 'Noel Aniket Nayak', role: 'Chairperson' },

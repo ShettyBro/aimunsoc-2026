@@ -17,6 +17,9 @@ const AVAILABLE_DOCS = new Set([
   "/docs/AICON 26 IPC Background Guide.PDF",
   "/docs/AIPPM BG-AICON'26.pdf",
   "/docs/AiCon 2026- IP(Photojournalist)-BG final.pdf",
+  "/docs/AICON UNSC BG.pdf",
+  "/docs/BACKGROUND GUIDE - AI CON 26 DISEC.pdf",
+  "/docs/UNW BG AICON 26.pdf",
 ]);
 
 interface CommitteeModalProps {
