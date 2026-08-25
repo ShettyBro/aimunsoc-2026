@@ -59,7 +59,7 @@ export const committees: Committee[] = [
     fullName: 'United Nations Human Rights Council',
     type: 'international',
     image: '/CommitteeLogos/3.png',
-    backgroundGuide: '/docs/UNHRC.pdf',
+    backgroundGuide: '/docs/AICON UNHRC.pdf',
     venue: 'MBA Auditorium',
     chairs: [
       { name: 'Alby Mathew', role: 'Chairperson' },
