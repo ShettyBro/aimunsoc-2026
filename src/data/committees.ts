@@ -93,7 +93,7 @@ export const committees: Committee[] = [
     fullName: 'Joint Crisis Committee – Indian Cabinet',
     type: 'national',
     image: '/CommitteeLogos/5.png',
-    backgroundGuide: '/docs/JCC.pdf',
+    backgroundGuide: '/docs/Bg jcc aicon draft.docx',
     venue: 'Civil Seminar Hall',
     freezeDate: '3 December 1971',
     chairs: [
@@ -111,7 +111,7 @@ export const committees: Committee[] = [
     fullName: 'Joint Crisis Committee – Pakistan Cabinet',
     type: 'national',
     image: '/CommitteeLogos/5.png',
-    backgroundGuide: '/docs/JCC.pdf',
+    backgroundGuide: '/docs/Bg jcc aicon draft.docx',
     venue: 'Civil Seminar Hall',
     freezeDate: '3 December 1971',
     chairs: [

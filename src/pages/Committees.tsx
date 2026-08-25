@@ -20,6 +20,7 @@ const AVAILABLE_DOCS = new Set([
   "/docs/AICON UNSC BG.pdf",
   "/docs/BACKGROUND GUIDE - AI CON 26 DISEC.pdf",
   "/docs/UNW BG AICON 26.pdf",
+  "/docs/Bg jcc aicon draft.docx",
 ]);
 
 interface CommitteeModalProps {
